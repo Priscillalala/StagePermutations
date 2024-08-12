@@ -74,7 +74,7 @@ public class IslandPlatform : PermutationBehaviour, StagePermutationsProvider.IS
         GameObject pillar = Object.Instantiate(Addressable<GameObject>("RoR2/DLC1/ancientloft/AncientLoft_PillarHalfIntactSimpler.prefab"), disabled.transform);
         pillar.transform.localPosition = new Vector3(195, -10, 39);
 
-        GameObject largeFountain = Object.Instantiate(Addressable<GameObject>("RoR2/DLC1/ancientloft/AncientLoft_FountainLG.prefab"), disabled.transform);
+        /*GameObject largeFountain = Object.Instantiate(Addressable<GameObject>("RoR2/DLC1/ancientloft/AncientLoft_FountainLG.prefab"), disabled.transform);
         largeFountain.transform.localPosition = new Vector3(172f, 20.34f, -28.3f);
         largeFountain.transform.eulerAngles = new Vector3(0, 270, 0);
 
@@ -82,7 +82,15 @@ public class IslandPlatform : PermutationBehaviour, StagePermutationsProvider.IS
         GameObject sculpture1 = Object.Instantiate(AncientLoft_SculptureSM, disabled.transform);
         sculpture1.transform.localPosition = new Vector3(173, 22, -36);
         GameObject sculpture2 = Object.Instantiate(AncientLoft_SculptureSM, disabled.transform);
-        sculpture2.transform.localPosition = new Vector3(173.5f, 22f, -21f);
+        sculpture2.transform.localPosition = new Vector3(173.5f, 22f, -21f);*/
+
+        /*GameObject circleArchway = Object.Instantiate(Addressable<GameObject>("RoR2/DLC1/ancientloft/AncientLoft_CircleArchway.prefab"), disabled.transform);
+        circleArchway.transform.localPosition = new Vector3(310f, -7f, -111.19f);
+        circleArchway.transform.eulerAngles = new Vector3(270, 90, 0);*/
+
+        GameObject templeShrine = Object.Instantiate(Addressable<GameObject>("RoR2/DLC1/ancientloft/AncientLoft_TempleShrine.prefab"), disabled.transform);
+        templeShrine.transform.localPosition = new Vector3(175f, 19.9f, -28.3f);
+        templeShrine.transform.eulerAngles = new Vector3(0, 90, 0);
 
         GameObject spinningRocks = Object.Instantiate(Addressable<GameObject>("RoR2/DLC1/ancientloft/AncientLoft_SpnningRocks.prefab"), disabled.transform);
         spinningRocks.transform.localPosition = new Vector3(190, 25, -45);
@@ -116,6 +124,11 @@ public class IslandPlatform : PermutationBehaviour, StagePermutationsProvider.IS
                         setSceneObjectsActive.objectsToDeactivate.Add(ruinsTransform.gameObject);
                     }
                 }
+            }
+
+            if (ruinsHolder.transform.TryFind("AncientLoft_CircleArchway", out Transform circleArchway))
+            {
+                setSceneObjectsActive.objectsToDeactivate.Remove(circleArchway.gameObject);
             }
         }
 

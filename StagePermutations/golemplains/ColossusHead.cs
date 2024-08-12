@@ -73,6 +73,7 @@ public class ColossusHead : PermutationBehaviour, StagePermutationsProvider.ISta
         mdlRaidColossusHeadDestroyedChild.GetComponent<MeshRenderer>().sharedMaterial = matColossusHeadMossy;
         mdlRaidColossusHeadDestroyedChild.gameObject.layer = LayerIndex.world.intVal;
         mdlRaidColossusHeadDestroyedChild.gameObject.AddComponent<MeshCollider>();
+        mdlRaidColossusHeadDestroyedChild.gameObject.AddComponent<SurfaceDefProvider>().surfaceDef = Addressable<SurfaceDef>("RoR2/Base/Common/sdStone.asset");
         RaidColossusHeadDestroyed.transform.localPosition = new Vector3(235f, 65.1f, 30f);
         RaidColossusHeadDestroyed.transform.localEulerAngles = new Vector3(270, 300, 0);
         RaidColossusHeadDestroyed.AddComponent<GateStateSetter>().gateToDisableWhenEnabled = GATE_NAME_RUINED;
@@ -106,6 +107,7 @@ public class ColossusHead : PermutationBehaviour, StagePermutationsProvider.ISta
         ColossusHead1.GetComponent<MeshRenderer>().sharedMaterial = matColossusHeadMossy;
         ColossusHead1.layer = LayerIndex.world.intVal;
         ColossusHead1.AddComponent<MeshCollider>();
+        ColossusHead1.AddComponent<SurfaceDefProvider>().surfaceDef = Addressable<SurfaceDef>("RoR2/Base/Common/sdStone.asset");
         ColossusHead1.transform.localScale = Vector3.one * 5f;
         ColossusHead1.transform.localEulerAngles = new Vector3(270, 0, 0);
         colossusHead1Parent.localPosition = new Vector3(-35, 38, -152);
