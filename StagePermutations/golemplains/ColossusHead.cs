@@ -3,8 +3,8 @@
 [RegisterPermutation("golemplains2", "Titanic Plains", "Colossus Heads")]
 public class ColossusHead : PermutationBehaviour, StagePermutationsProvider.IStaticContent
 {
-    const string GATE_NAME_FULL = "BlockedByRuinedColossusHead";
-    const string GATE_NAME_RUINED = "BlockedByFullColossusHead";
+    const string GATE_NAME_RUINED = "BlockedByRuinedColossusHead";
+    const string GATE_NAME_FULL = "BlockedByFullColossusHead";
 
     public IEnumerator LoadAsync(IProgress<float> progressReceiver)
     {
@@ -70,7 +70,7 @@ public class ColossusHead : PermutationBehaviour, StagePermutationsProvider.ISta
         mdlRaidColossusHeadDestroyedChild.localPosition = Vector3.zero;
         mdlRaidColossusHeadDestroyedChild.localEulerAngles = Vector3.zero;
         mdlRaidColossusHeadDestroyedChild.localScale = Vector3.one * 5f;
-        mdlRaidColossusHeadDestroyedChild.GetComponent<MeshRenderer>().material = matColossusHeadMossy;
+        mdlRaidColossusHeadDestroyedChild.GetComponent<MeshRenderer>().sharedMaterial = matColossusHeadMossy;
         mdlRaidColossusHeadDestroyedChild.gameObject.layer = LayerIndex.world.intVal;
         mdlRaidColossusHeadDestroyedChild.gameObject.AddComponent<MeshCollider>();
         RaidColossusHeadDestroyed.transform.localPosition = new Vector3(235f, 65.1f, 30f);
@@ -103,7 +103,7 @@ public class ColossusHead : PermutationBehaviour, StagePermutationsProvider.ISta
 
         Transform colossusHead1Parent = new GameObject("colossusHead1Parent").transform;
         GameObject ColossusHead1 = Object.Instantiate(Addressable<GameObject>("RoR2/Base/Common/Props/mdlColossusHead1.fbx"), colossusHead1Parent);
-        ColossusHead1.GetComponent<MeshRenderer>().material = matColossusHeadMossy;
+        ColossusHead1.GetComponent<MeshRenderer>().sharedMaterial = matColossusHeadMossy;
         ColossusHead1.layer = LayerIndex.world.intVal;
         ColossusHead1.AddComponent<MeshCollider>();
         ColossusHead1.transform.localScale = Vector3.one * 5f;
