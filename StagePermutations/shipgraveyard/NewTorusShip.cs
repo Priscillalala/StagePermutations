@@ -1,6 +1,6 @@
 ﻿namespace StagePermutations.shipgraveyard;
 
-[RegisterPermutation("shipgraveyard", "Siren`s Call", "New Torus Ship")]
+[RegisterPermutation("shipgraveyard", "Siren`s Call", "New Donut Ship", description = "A new crashed ship will sometimes appear in the middle of Siren`s Call")]
 public class NewTorusShip : PermutationBehaviour, StagePermutationsProvider.IStaticContent
 {
     const string GATE_NAME = "BlockedByTorusShip";

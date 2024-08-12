@@ -1,6 +1,6 @@
 ﻿namespace StagePermutations.golemplains;
 
-[RegisterPermutation("golemplains", "Titanic Plains", "More Backwall")]
+[RegisterPermutation("golemplains", "Titanic Plains", "Longer Backwall", description = "The backwall on the original Titanic Plains variant will sometimes extend to the edge of the stage")]
 public class MoreBackwall : PermutationBehaviour, StagePermutationsProvider.IStaticContent
 {
     const string GATE_NAME = "BlockedByFullColossusHead";

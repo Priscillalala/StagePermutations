@@ -12,4 +12,5 @@ public class RegisterPermutationAttribute : SearchableAttribute
     public string targetSceneName;
     public string configSection;
     public string name;
+    public string description;
 }

@@ -1,6 +1,6 @@
 ﻿namespace StagePermutations.foggyswamp;
 
-[RegisterPermutation("foggyswamp", "Wetland Aspect", "Outset Frame Platform")]
+[RegisterPermutation("foggyswamp", "Wetland Aspect", "Ruin Platform Variation", description = "Sometimes the ruin platform near the edge of Wetland Aspect will disappear")]
 public class FramePlatform : PermutationBehaviour, StagePermutationsProvider.IStaticContent
 {
     const string GATE_NAME = "RuinFramePlatform";

@@ -11,7 +11,6 @@ global using BepInEx;
 global using BepInEx.Configuration;
 global using MonoMod.Cil;
 global using Mono.Cecil.Cil;
-global using R2API;
 global using RoR2;
 global using RoR2.Navigation;
 global using HG;

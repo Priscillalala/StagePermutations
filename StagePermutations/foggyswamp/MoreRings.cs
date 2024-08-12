@@ -1,6 +1,6 @@
 ﻿namespace StagePermutations.foggyswamp;
 
-[RegisterPermutation("foggyswamp", "Wetland Aspect", "More Ruin Rings")]
+[RegisterPermutation("foggyswamp", "Wetland Aspect", "More Ruin Rings", description = "Two more floating ruin rings will sometimes appear on Wetland Aspect")]
 public class MoreRings : PermutationBehaviour
 {
     public override void Apply(Scene scene, IDictionary<string, GameObject> rootObjects, SceneObjectToggleGroup toggleGroupController)

@@ -1,6 +1,6 @@
 ﻿namespace StagePermutations.goolake;
 
-[RegisterPermutation("goolake", "Abandoned Aqueduct", "Receded Aqueduct")]
+[RegisterPermutation("goolake", "Abandoned Aqueduct", "Receded Aqueduct", description = "The main aqueduct on Abandoned Aqueduct will sometimes move towards the wall to make room for a new eel skeleton")]
 public class RecededAqueduct : PermutationBehaviour, StagePermutationsProvider.IStaticContent
 {
     const string GATE_NAME = "BlockedByEel";
@@ -23,7 +23,7 @@ public class RecededAqueduct : PermutationBehaviour, StagePermutationsProvider.I
     {
         if (!goolakeBoulderPrefab)
         {
-            goolakeBoulderPrefab = PrefabAPI.InstantiateClone(Addressable<GameObject>("RoR2/Base/golemplains2/BBBoulderMediumRound1.prefab"), "GlBoulderApproximation", false);
+            goolakeBoulderPrefab = Prefab.Clone(Addressable<GameObject>("RoR2/Base/golemplains2/BBBoulderMediumRound1.prefab"), "GlBoulderApproximation");
             goolakeBoulderPrefab.GetComponent<MeshRenderer>().sharedMaterial = Addressable<Material>("RoR2/Base/goolake/matGoolakeRocks.mat");
         }
         if (!rootObjects.TryGetValue("HOLDER: GameplaySpace", out GameObject gameplaySpaceHolder))

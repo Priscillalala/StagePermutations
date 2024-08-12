@@ -1,6 +1,6 @@
 ﻿namespace StagePermutations.shipgraveyard;
 
-[RegisterPermutation("shipgraveyard", "Siren`s Call", "Ship Middle Section")]
+[RegisterPermutation("shipgraveyard", "Siren`s Call", "Crashed Ship Middle Section Variation", description = "The middle section of the long rectangular crashed ship on Siren`s Call will sometimes appear in a different orientation")]
 public class RectShipMid : PermutationBehaviour, StagePermutationsProvider.IStaticContent
 {
     const string GATE_NAME = "RectShipMid";

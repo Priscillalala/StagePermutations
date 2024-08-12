@@ -1,6 +1,6 @@
 ﻿namespace StagePermutations.wispgraveyard;
 
-[RegisterPermutation("wispgraveyard", "Scorched Acres", "Lower Spiral Staircase")]
+[RegisterPermutation("wispgraveyard", "Scorched Acres", "Lower Staircase Variation", description = "A lower staircase walkway on the top Scorched Acres platform will sometimes not appear")]
 public class LowerStaircase : PermutationBehaviour, StagePermutationsProvider.IStaticContent
 {
     const string GATE_NAME = "LowerSpiralStaircase";

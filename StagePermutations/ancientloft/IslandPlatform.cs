@@ -1,6 +1,6 @@
 ﻿namespace StagePermutations.ancientloft;
 
-[RegisterPermutation("ancientloft", "Aphelion Sanctuary", "Island Platform")]
+[RegisterPermutation("ancientloft", "Aphelion Sanctuary", "Rocky Platform Variation", description = "Sometimes the rocky platform connected to Aphelion Sanctuary will disappear")]
 public class IslandPlatform : PermutationBehaviour, StagePermutationsProvider.IStaticContent
 {
     const string GATE_NAME = "IslandPlatform";

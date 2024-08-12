@@ -1,6 +1,6 @@
 ﻿namespace StagePermutations.goolake;
 
-[RegisterPermutation("goolake", "Abandoned Aqueduct", "Second Aqueduct")]
+[RegisterPermutation("goolake", "Abandoned Aqueduct", "Second Aqueduct", description = "A second aqueduct structure will sometimes appear on Abandoned Aqueduct")]
 public class SecondAqueduct : PermutationBehaviour, StagePermutationsProvider.IStaticContent
 {
     const string GATE_NAME = "SecondaryAqueduct";

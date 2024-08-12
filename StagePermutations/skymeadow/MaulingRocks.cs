@@ -1,6 +1,6 @@
 ﻿namespace StagePermutations.skymeadow;
 
-[RegisterPermutation("skymeadow", "Sky Meadow", "Mauling Rocks Direction")]
+[RegisterPermutation("skymeadow", "Sky Meadow", "Mauling Rocks Direction Variation", description = "The mauling rocks on Sky Meadow will sometimes fly the opposite direction")]
 public class MaulingRocks : PermutationBehaviour
 {
     public override void Apply(Scene scene, IDictionary<string, GameObject> rootObjects, SceneObjectToggleGroup toggleGroupController)
