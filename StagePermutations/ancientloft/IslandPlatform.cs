@@ -163,5 +163,15 @@ public class IslandPlatform : PermutationBehaviour, StagePermutationsProvider.IS
             minEnabled = 1,
             maxEnabled = 1,
         });
+
+        if (rootObjects.TryGetValue("SceneInfo", out GameObject sceneInfo) && sceneInfo.TryGetComponent(out ClassicStageInfo classicStageInfo))
+        {
+            classicStageInfo.sceneDirectorInteractibleCredits -= 40;
+            ArrayUtils.ArrayAppend(ref classicStageInfo.bonusInteractibleCreditObjects, new ClassicStageInfo.BonusInteractibleCreditObject
+            {
+                objectThatGrantsPointsIfEnabled = TerrainPlatform.gameObject,
+                points = 40
+            });
+        }
     }
 }

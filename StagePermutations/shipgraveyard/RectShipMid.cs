@@ -38,7 +38,7 @@ public class RectShipMid : PermutationBehaviour, StagePermutationsProvider.IStat
         GameObject RectShipMidAlt = Object.Instantiate(Addressable<GameObject>("RoR2/Base/shipgraveyard/RectShipMid.prefab"));
         RectShipMidAlt.AddComponent<GateStateSetter>().gateToDisableWhenEnabled = GATE_NAME;
         RectShipMidAlt.SetActive(false);
-        RectShipMidAlt.AddComponent<DisableOcclusionNearby>().radius = 80f;
+        RectShipMidAlt.AddComponent<DisableOcclusionNearby>().radius = 200f;
         RectShipMidAlt.transform.localPosition = new Vector3(0, 47, 110);
         RectShipMidAlt.transform.localEulerAngles = new Vector3(10, 40, 0);
         RectShipMidAlt.AddComponent(out SetSceneObjectsActive setSceneObjectsActive);
