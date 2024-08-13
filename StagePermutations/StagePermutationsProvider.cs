@@ -34,7 +34,7 @@ public class StagePermutationsProvider : BaseUnityPlugin, IContentPackProvider
 {
     public const string
         GUID = "groovesalad." + NAME,
-        NAME = "StagePermutations",
+        NAME = "StageVariety",
         VERSION = "1.0.0";
 
     public string identifier => GUID;
@@ -51,12 +51,14 @@ public class StagePermutationsProvider : BaseUnityPlugin, IContentPackProvider
         List<RegisterPermutationAttribute> attributes = [];
         SearchableAttribute.GetInstances(attributes);
         permutations = attributes
-            .Where(x => Config.Bind(x.configSection, $"Enable {x.name}", true).Value)
+            .Where(x => Config.Bind(x.configSection, $"Enable {x.name}", true, x.description != null ? new ConfigDescription(x.description) : null).Value)
             .ToDictionary(x => (PermutationBehaviour)Activator.CreateInstance((Type)x.target));
         permutationsLookup = permutations.ToLookup(x => x.Value.targetSceneName, x => x.Key);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
+#if DEBUG
         On.RoR2.Navigation.NodeGraph.GenerateLinkDebugMesh += NodeGraph_GenerateLinkDebugMesh;
+#endif
     }
 
     private void OnSceneLoaded(Scene newScene, LoadSceneMode loadSceneMode)
@@ -76,6 +78,7 @@ public class StagePermutationsProvider : BaseUnityPlugin, IContentPackProvider
         }
     }
 
+#if DEBUG
     private static Mesh NodeGraph_GenerateLinkDebugMesh(On.RoR2.Navigation.NodeGraph.orig_GenerateLinkDebugMesh orig, NodeGraph self, HullMask hullMask)
     {
         using WireMeshBuilder wireMeshBuilder = new WireMeshBuilder();
@@ -122,6 +125,7 @@ public class StagePermutationsProvider : BaseUnityPlugin, IContentPackProvider
         }
         return wireMeshBuilder.GenerateMesh();
     }
+#endif
 
     public IEnumerator LoadStaticContentAsync(LoadStaticContentAsyncArgs args)
     {
