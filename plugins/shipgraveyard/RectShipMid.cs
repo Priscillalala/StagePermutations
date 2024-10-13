@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.shipgraveyard;
 
 [RegisterPermutation("shipgraveyard", "Siren`s Call", "Crashed Ship Middle Section Variation", description = "The middle section of the long rectangular crashed ship on Siren`s Call will sometimes appear in a different orientation")]
-public class RectShipMid : PermutationBehaviour, StagePermutationsProvider.IStaticContent
+public class RectShipMid : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
 {
     const string GATE_NAME = "RectShipMid";
 
-    public IEnumerator LoadAsync(IProgress<float> progressReceiver)
+    public IEnumerator Init()
     {
         var shipgraveyardGroundNodeNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/shipgraveyard/shipgraveyardGroundNodeNodegraph.asset");
         var shipgraveyardAirNodeNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/shipgraveyard/shipgraveyardAirNodeNodegraph.asset");

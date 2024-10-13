@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.goolake;
 
 [RegisterPermutation("goolake", "Abandoned Aqueduct", "Second Aqueduct", description = "A second aqueduct structure will sometimes appear on Abandoned Aqueduct")]
-public class SecondAqueduct : PermutationBehaviour, StagePermutationsProvider.IStaticContent
+public class SecondAqueduct : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
 {
     const string GATE_NAME = "SecondaryAqueduct";
 
-    public IEnumerator LoadAsync(IProgress<float> progressReceiver)
+    public IEnumerator Init()
     {
         var goolakeGroundNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/goolake/goolakeGroundNodegraph.asset");
         var goolakeAirNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/goolake/goolakeAirNodegraph.asset");

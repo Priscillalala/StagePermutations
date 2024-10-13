@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.rootjungle;
 
 [RegisterPermutation("rootjungle", "Sundered Grove", "Mushroom Platform Variation", description = "A mushroom platform on Sundered Grove will sometimes disappear")]
-public class ShroomShelf : PermutationBehaviour, StagePermutationsProvider.IStaticContent
+public class ShroomShelf : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
 {
     const string GATE_NAME = "OnShroomShelf";
 
-    public IEnumerator LoadAsync(IProgress<float> progressReceiver)
+    public IEnumerator Init()
     {
         var rootjungleGroundNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/rootjungle/rootjungleGroundNodesNodegraph.asset");
         var rootjungleAirNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/rootjungle/rootjungleAirNodesNodegraph.asset");

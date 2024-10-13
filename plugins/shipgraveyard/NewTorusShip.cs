@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.shipgraveyard;
 
 [RegisterPermutation("shipgraveyard", "Siren`s Call", "New Donut Ship", description = "A new crashed ship will sometimes appear in the middle of Siren`s Call")]
-public class NewTorusShip : PermutationBehaviour, StagePermutationsProvider.IStaticContent
+public class NewTorusShip : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
 {
     const string GATE_NAME = "BlockedByTorusShip";
 
-    public IEnumerator LoadAsync(IProgress<float> progressReceiver)
+    public IEnumerator Init()
     {
         var shipgraveyardGroundNodeNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/shipgraveyard/shipgraveyardGroundNodeNodegraph.asset");
         var shipgraveyardAirNodeNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/shipgraveyard/shipgraveyardAirNodeNodegraph.asset");

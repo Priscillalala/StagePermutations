@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.golemplains;
 
 [RegisterPermutation("golemplains2", "Titanic Plains", "Colossus Heads", description = "Two Colossus heads will sometimes appear on the alternate Titanic Plains variant")]
-public class ColossusHead : PermutationBehaviour, StagePermutationsProvider.IStaticContent
+public class ColossusHead : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
 {
     const string GATE_NAME_RUINED = "BlockedByRuinedColossusHead";
     const string GATE_NAME_FULL = "BlockedByFullColossusHead";
 
-    public IEnumerator LoadAsync(IProgress<float> progressReceiver)
+    public IEnumerator Init()
     {
         var golemplains2GroundNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/golemplains2/golemplains2GroundNodesNodegraph.asset");
         var golemplains2AirNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/golemplains2/golemplains2AirNodesNodegraph.asset");

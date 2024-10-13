@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.foggyswamp;
 
 [RegisterPermutation("foggyswamp", "Wetland Aspect", "Ruin Platform Variation", description = "Sometimes the ruin platform near the edge of Wetland Aspect will disappear")]
-public class FramePlatform : PermutationBehaviour, StagePermutationsProvider.IStaticContent
+public class FramePlatform : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
 {
     const string GATE_NAME = "RuinFramePlatform";
 
-    public IEnumerator LoadAsync(IProgress<float> progressReceiver)
+    public IEnumerator Init()
     {
         var foggyswampGroundNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/foggyswamp/foggyswampGroundNodesNodegraph.asset");
         var foggyswampAirNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/foggyswamp/foggyswampAirNodesNodegraph.asset");

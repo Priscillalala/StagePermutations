@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.ancientloft;
 
 [RegisterPermutation("ancientloft", "Aphelian Sanctuary", "Rocky Platform Variation", description = "Sometimes the rocky platform connected to Aphelian Sanctuary will disappear")]
-public class IslandPlatform : PermutationBehaviour, StagePermutationsProvider.IStaticContent
+public class IslandPlatform : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
 {
     const string GATE_NAME = "IslandPlatform";
 
-    public IEnumerator LoadAsync(IProgress<float> progressReceiver)
+    public IEnumerator Init()
     {
         var ancientloft_GroundNodeGraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/DLC1/ancientloft/ancientloft_GroundNodeGraph.asset");
         var ancientloft_AirNodeGraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/DLC1/ancientloft/ancientloft_AirNodeGraph.asset");

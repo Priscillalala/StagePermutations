@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.golemplains;
 
 [RegisterPermutation("golemplains", "Titanic Plains", "Longer Backwall", description = "The backwall on the original Titanic Plains variant will sometimes extend to the edge of the stage")]
-public class MoreBackwall : PermutationBehaviour, StagePermutationsProvider.IStaticContent
+public class MoreBackwall : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
 {
     const string GATE_NAME = "BlockedByFullColossusHead";
 
-    public IEnumerator LoadAsync(IProgress<float> progressReceiver)
+    public IEnumerator Init()
     {
         var golemplainsGroundNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/golemplains/golemplainsGroundNodesNodegraph.asset");
         var golemplainsAirNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/golemplains/golemplainsAirNodesNodegraph.asset");

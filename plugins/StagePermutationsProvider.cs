@@ -1,12 +1,9 @@
 ﻿using BepInEx.Configuration;
-using SearchableAttribute = HG.Reflection.SearchableAttribute;
-using System.Security.Permissions;
-using System.Security;
-using RoR2.ContentManagement;
-using HG.Coroutines;
-using HG;
 using RoR2.Navigation;
+using System.Security;
+using System.Security.Permissions;
 using UnityEngine.SceneManagement;
+using SearchableAttribute = HG.Reflection.SearchableAttribute;
 
 [module: UnverifiableCode]
 #pragma warning disable
@@ -17,30 +14,25 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations;
 
 [BepInPlugin(GUID, NAME, VERSION)]
-public class StagePermutationsProvider : BaseUnityPlugin, IContentPackProvider
+public class StagePermutationsProvider : BaseUnityPlugin
 {
     public const string
         GUID = "groovesalad." + NAME,
         NAME = "StageVariety",
         VERSION = "1.0.0";
 
-    public string identifier => GUID;
+    public static Dictionary<PermutationBehaviour, RegisterPermutationAttribute> Permutations { get; private set; }
 
-    public AssetBundleCreateRequest assetBundleCreateRequest;
-    public Dictionary<PermutationBehaviour, RegisterPermutationAttribute> permutations;
-    public static ILookup<string, PermutationBehaviour> permutationsLookup;
-    //public ContentPack contentPack;
+    public ILookup<string, PermutationBehaviour> permutationsLookup;
 
     public void Awake()
     {
-        ContentManager.collectContentPackProviders += add => add(this);
-
         List<RegisterPermutationAttribute> attributes = [];
         SearchableAttribute.GetInstances(attributes);
-        permutations = attributes
+        Permutations = attributes
             .Where(x => Config.Bind(x.configSection, $"Enable {x.name}", true, x.description != null ? new ConfigDescription(x.description) : null).Value)
             .ToDictionary(x => (PermutationBehaviour)Activator.CreateInstance((Type)x.target));
-        permutationsLookup = permutations.ToLookup(x => x.Value.targetSceneName, x => x.Key);
+        permutationsLookup = Permutations.ToLookup(x => x.Value.targetSceneName, x => x.Key);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 #if DEBUG
@@ -114,48 +106,48 @@ public class StagePermutationsProvider : BaseUnityPlugin, IContentPackProvider
     }
 #endif
 
-    public IEnumerator LoadStaticContentAsync(LoadStaticContentAsyncArgs args)
+    [SystemInitializer]
+    private static IEnumerator Init()
     {
-        ParallelProgressCoroutine parallelProgressCoroutine = new ParallelProgressCoroutine(new ReadableProgress<float>(args.ReportProgress));
-        foreach (IStaticContent staticContent in permutations.Keys.OfType<IStaticContent>())
+        List<IEnumerator> initAsyncCoroutines = Permutations.Keys.OfType<IAsyncInit>().Select(x => SafeCoroutineWrapper(x.Init())).ToList();
+        while (initAsyncCoroutines.Count > 0)
         {
-            static IEnumerator SafeCoroutineWrapper(IEnumerator coroutine)
+            for (int i = initAsyncCoroutines.Count - 1; i >= 0; i--)
             {
-                while (coroutine.MoveNext())
+                IEnumerator coroutine = initAsyncCoroutines[i];
+                if (coroutine.MoveNext())
                 {
-                    switch (coroutine.Current)
-                    {
-                        case IEnumerator inner:
-                            while (inner.MoveNext()) yield return inner.Current;
-                            break;
-                        case AsyncOperation asyncOperation:
-                            while (!asyncOperation.isDone) yield return null;
-                            break;
-                        default:
-                            yield return coroutine.Current;
-                            break;
-                    }
+                    yield return coroutine.Current;
+                }
+                else
+                {
+                    initAsyncCoroutines.RemoveAt(i);
                 }
             }
-            ReadableProgress<float> progressReceiver = new();
-            parallelProgressCoroutine.Add(SafeCoroutineWrapper(staticContent.LoadAsync(progressReceiver)), progressReceiver);
         }
-        while (parallelProgressCoroutine.MoveNext()) yield return parallelProgressCoroutine.Current;
+
+        static IEnumerator SafeCoroutineWrapper(IEnumerator coroutine)
+        {
+            while (coroutine.MoveNext())
+            {
+                switch (coroutine.Current)
+                {
+                    case IEnumerator inner:
+                        while (inner.MoveNext()) yield return inner.Current;
+                        break;
+                    case AsyncOperation asyncOperation:
+                        while (!asyncOperation.isDone) yield return null;
+                        break;
+                    default:
+                        yield return coroutine.Current;
+                        break;
+                }
+            }
+        }
     }
 
-    public IEnumerator GenerateContentPackAsync(GetContentPackAsyncArgs args)
+    public interface IAsyncInit
     {
-        //ContentPack.Copy(contentPack, args.output);
-        yield break;
-    }
-
-    public IEnumerator FinalizeAsync(FinalizeAsyncArgs args)
-    {
-        yield break;
-    }
-
-    public interface IStaticContent
-    {
-        public IEnumerator LoadAsync(IProgress<float> progressReceiver);
+        public IEnumerator Init();
     }
 }

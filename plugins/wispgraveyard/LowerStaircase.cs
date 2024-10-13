@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.wispgraveyard;
 
 [RegisterPermutation("wispgraveyard", "Scorched Acres", "Lower Staircase Variation", description = "A lower staircase walkway on the top Scorched Acres platform will sometimes not appear")]
-public class LowerStaircase : PermutationBehaviour, StagePermutationsProvider.IStaticContent
+public class LowerStaircase : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
 {
     const string GATE_NAME = "LowerSpiralStaircase";
 
-    public IEnumerator LoadAsync(IProgress<float> progressReceiver)
+    public IEnumerator Init()
     {
         var wispgraveyardGroundNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/wispgraveyard/wispgraveyardGroundNodesNodegraph.asset");
         var wispgraveyardAirNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/wispgraveyard/wispgraveyardAirNodesNodegraph.asset");

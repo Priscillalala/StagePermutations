@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.blackbeach;
 
 [RegisterPermutation("blackbeach2", "Distant Roost", "Ruin Gate Door", description = "Sometimes the door of the large ruin gate on the alternate Distant Roost variant will be closed")]
-public class RuinGateDoor : PermutationBehaviour, StagePermutationsProvider.IStaticContent
+public class RuinGateDoor : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
 {
     const string GATE_NAME = "BlockedByRuinGateDoor";
 
-    public IEnumerator LoadAsync(IProgress<float> progressReceiver)
+    public IEnumerator Init()
     {
         var blackbeach2GroundNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/blackbeach2/blackbeach2GroundNodesNodegraph.asset");
         var blackbeach2AirNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/blackbeach2/blackbeach2AirNodesNodegraph.asset");
