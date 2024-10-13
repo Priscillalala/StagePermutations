@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.goolake;
 
 [RegisterPermutation("goolake", "Abandoned Aqueduct", "Receded Aqueduct", description = "The main aqueduct on Abandoned Aqueduct will sometimes move towards the wall to make room for a new eel skeleton")]
-public class RecededAqueduct : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
+public class RecededAqueduct : PermutationBehaviour, StagePermutationsPlugin.IAsyncInit
 {
     const string GATE_NAME = "BlockedByEel";
 

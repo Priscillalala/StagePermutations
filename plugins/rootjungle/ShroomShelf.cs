@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.rootjungle;
 
 [RegisterPermutation("rootjungle", "Sundered Grove", "Mushroom Platform Variation", description = "A mushroom platform on Sundered Grove will sometimes disappear")]
-public class ShroomShelf : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
+public class ShroomShelf : PermutationBehaviour, StagePermutationsPlugin.IAsyncInit
 {
     const string GATE_NAME = "OnShroomShelf";
 

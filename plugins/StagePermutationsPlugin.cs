@@ -14,7 +14,7 @@ using SearchableAttribute = HG.Reflection.SearchableAttribute;
 namespace StagePermutations;
 
 [BepInPlugin(GUID, NAME, VERSION)]
-public class StagePermutationsProvider : BaseUnityPlugin
+public class StagePermutationsPlugin : BaseUnityPlugin
 {
     public const string
         GUID = "groovesalad." + NAME,

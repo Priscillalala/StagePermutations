@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.wispgraveyard;
 
 [RegisterPermutation("wispgraveyard", "Scorched Acres", "Lower Staircase Variation", description = "A lower staircase walkway on the top Scorched Acres platform will sometimes not appear")]
-public class LowerStaircase : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
+public class LowerStaircase : PermutationBehaviour, StagePermutationsPlugin.IAsyncInit
 {
     const string GATE_NAME = "LowerSpiralStaircase";
 

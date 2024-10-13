@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.golemplains;
 
 [RegisterPermutation("golemplains2", "Titanic Plains", "Colossus Heads", description = "Two Colossus heads will sometimes appear on the alternate Titanic Plains variant")]
-public class ColossusHead : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
+public class ColossusHead : PermutationBehaviour, StagePermutationsPlugin.IAsyncInit
 {
     const string GATE_NAME_RUINED = "BlockedByRuinedColossusHead";
     const string GATE_NAME_FULL = "BlockedByFullColossusHead";

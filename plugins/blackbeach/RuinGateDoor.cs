@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.blackbeach;
 
 [RegisterPermutation("blackbeach2", "Distant Roost", "Ruin Gate Door", description = "Sometimes the door of the large ruin gate on the alternate Distant Roost variant will be closed")]
-public class RuinGateDoor : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
+public class RuinGateDoor : PermutationBehaviour, StagePermutationsPlugin.IAsyncInit
 {
     const string GATE_NAME = "BlockedByRuinGateDoor";
 

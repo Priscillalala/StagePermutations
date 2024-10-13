@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.foggyswamp;
 
 [RegisterPermutation("foggyswamp", "Wetland Aspect", "Ruin Platform Variation", description = "Sometimes the ruin platform near the edge of Wetland Aspect will disappear")]
-public class FramePlatform : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
+public class FramePlatform : PermutationBehaviour, StagePermutationsPlugin.IAsyncInit
 {
     const string GATE_NAME = "RuinFramePlatform";
 

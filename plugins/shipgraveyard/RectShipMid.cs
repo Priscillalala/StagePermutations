@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.shipgraveyard;
 
 [RegisterPermutation("shipgraveyard", "Siren`s Call", "Crashed Ship Middle Section Variation", description = "The middle section of the long rectangular crashed ship on Siren`s Call will sometimes appear in a different orientation")]
-public class RectShipMid : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
+public class RectShipMid : PermutationBehaviour, StagePermutationsPlugin.IAsyncInit
 {
     const string GATE_NAME = "RectShipMid";
 

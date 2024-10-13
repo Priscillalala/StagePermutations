@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.goolake;
 
 [RegisterPermutation("goolake", "Abandoned Aqueduct", "Second Aqueduct", description = "A second aqueduct structure will sometimes appear on Abandoned Aqueduct")]
-public class SecondAqueduct : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
+public class SecondAqueduct : PermutationBehaviour, StagePermutationsPlugin.IAsyncInit
 {
     const string GATE_NAME = "SecondaryAqueduct";
 

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.ancientloft;
 
 [RegisterPermutation("ancientloft", "Aphelian Sanctuary", "Rocky Platform Variation", description = "Sometimes the rocky platform connected to Aphelian Sanctuary will disappear")]
-public class IslandPlatform : PermutationBehaviour, StagePermutationsProvider.IAsyncInit
+public class IslandPlatform : PermutationBehaviour, StagePermutationsPlugin.IAsyncInit
 {
     const string GATE_NAME = "IslandPlatform";
 
