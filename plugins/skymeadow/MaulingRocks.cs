@@ -1,4 +1,8 @@
-﻿namespace StagePermutations.skymeadow;
+﻿using RoR2.Navigation;
+using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
+
+namespace StagePermutations.skymeadow;
 
 [RegisterPermutation("skymeadow", "Sky Meadow", "Mauling Rocks Direction Variation", description = "The mauling rocks on Sky Meadow will sometimes fly the opposite direction")]
 public class MaulingRocks : PermutationBehaviour

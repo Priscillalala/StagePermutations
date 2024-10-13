@@ -1,4 +1,8 @@
-﻿namespace StagePermutations.ancientloft;
+﻿using RoR2.Navigation;
+using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
+
+namespace StagePermutations.ancientloft;
 
 [RegisterPermutation("ancientloft", "Aphelian Sanctuary", "Rocky Platform Variation", description = "Sometimes the rocky platform connected to Aphelian Sanctuary will disappear")]
 public class IslandPlatform : PermutationBehaviour, StagePermutationsProvider.IStaticContent

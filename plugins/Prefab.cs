@@ -1,4 +1,6 @@
-﻿namespace StagePermutations;
+﻿using UnityEngine.Networking;
+
+namespace StagePermutations;
 
 static class Prefab
 {

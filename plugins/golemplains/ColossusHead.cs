@@ -1,4 +1,8 @@
-﻿namespace StagePermutations.golemplains;
+﻿using RoR2.Navigation;
+using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
+
+namespace StagePermutations.golemplains;
 
 [RegisterPermutation("golemplains2", "Titanic Plains", "Colossus Heads", description = "Two Colossus heads will sometimes appear on the alternate Titanic Plains variant")]
 public class ColossusHead : PermutationBehaviour, StagePermutationsProvider.IStaticContent

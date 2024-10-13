@@ -1,4 +1,8 @@
-﻿namespace StagePermutations.shipgraveyard;
+﻿using RoR2.Navigation;
+using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
+
+namespace StagePermutations.shipgraveyard;
 
 [RegisterPermutation("shipgraveyard", "Siren`s Call", "Crashed Ship Middle Section Variation", description = "The middle section of the long rectangular crashed ship on Siren`s Call will sometimes appear in a different orientation")]
 public class RectShipMid : PermutationBehaviour, StagePermutationsProvider.IStaticContent

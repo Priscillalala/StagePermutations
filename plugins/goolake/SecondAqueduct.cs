@@ -1,4 +1,8 @@
-﻿namespace StagePermutations.goolake;
+﻿using RoR2.Navigation;
+using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
+
+namespace StagePermutations.goolake;
 
 [RegisterPermutation("goolake", "Abandoned Aqueduct", "Second Aqueduct", description = "A second aqueduct structure will sometimes appear on Abandoned Aqueduct")]
 public class SecondAqueduct : PermutationBehaviour, StagePermutationsProvider.IStaticContent

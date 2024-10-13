@@ -1,4 +1,8 @@
-﻿namespace StagePermutations.blackbeach;
+﻿using RoR2.Navigation;
+using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
+
+namespace StagePermutations.blackbeach;
 
 [RegisterPermutation("blackbeach", "Distant Roost", "New Ruin Gate", description = "Sometimes a new ruin gate will appear on the upper walkway of the original Distant Roost variant")]
 public class MoreRuins : PermutationBehaviour, StagePermutationsProvider.IStaticContent

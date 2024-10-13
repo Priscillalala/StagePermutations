@@ -1,4 +1,8 @@
-﻿namespace StagePermutations;
+﻿using RoR2.Navigation;
+using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
+
+namespace StagePermutations;
 
 public abstract class PermutationBehaviour
 {

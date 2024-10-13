@@ -1,25 +1,12 @@
-﻿global using System;
-global using System.Collections;
-global using System.Collections.Generic;
-global using System.Linq;
-global using UnityEngine;
-global using UnityEngine.Networking;
-global using UnityEngine.SceneManagement;
-global using UnityEngine.AddressableAssets;
-global using UnityEngine.ResourceManagement.AsyncOperations;
-global using BepInEx;
-global using BepInEx.Configuration;
-global using MonoMod.Cil;
-global using Mono.Cecil.Cil;
-global using RoR2;
-global using RoR2.Navigation;
-global using HG;
-global using Object = UnityEngine.Object;
-global using SearchableAttribute = HG.Reflection.SearchableAttribute;
+﻿using BepInEx.Configuration;
+using SearchableAttribute = HG.Reflection.SearchableAttribute;
 using System.Security.Permissions;
 using System.Security;
 using RoR2.ContentManagement;
 using HG.Coroutines;
+using HG;
+using RoR2.Navigation;
+using UnityEngine.SceneManagement;
 
 [module: UnverifiableCode]
 #pragma warning disable

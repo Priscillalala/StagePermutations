@@ -1,4 +1,8 @@
-﻿namespace StagePermutations.foggyswamp;
+﻿using RoR2.Navigation;
+using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
+
+namespace StagePermutations.foggyswamp;
 
 [RegisterPermutation("foggyswamp", "Wetland Aspect", "Ruin Platform Variation", description = "Sometimes the ruin platform near the edge of Wetland Aspect will disappear")]
 public class FramePlatform : PermutationBehaviour, StagePermutationsProvider.IStaticContent

@@ -1,4 +1,6 @@
-﻿namespace StagePermutations.foggyswamp;
+﻿using UnityEngine.SceneManagement;
+
+namespace StagePermutations.foggyswamp;
 
 [RegisterPermutation("foggyswamp", "Wetland Aspect", "Stump to Tree", description = "Sometimes the large tree stump on Wetland Aspect will be replaced by a full tree")]
 public class StumpToTree : PermutationBehaviour

@@ -1,4 +1,8 @@
-﻿namespace StagePermutations.wispgraveyard;
+﻿using RoR2.Navigation;
+using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
+
+namespace StagePermutations.wispgraveyard;
 
 [RegisterPermutation("wispgraveyard", "Scorched Acres", "Lower Staircase Variation", description = "A lower staircase walkway on the top Scorched Acres platform will sometimes not appear")]
 public class LowerStaircase : PermutationBehaviour, StagePermutationsProvider.IStaticContent

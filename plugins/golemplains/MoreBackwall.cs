@@ -1,4 +1,8 @@
-﻿namespace StagePermutations.golemplains;
+﻿using RoR2.Navigation;
+using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
+
+namespace StagePermutations.golemplains;
 
 [RegisterPermutation("golemplains", "Titanic Plains", "Longer Backwall", description = "The backwall on the original Titanic Plains variant will sometimes extend to the edge of the stage")]
 public class MoreBackwall : PermutationBehaviour, StagePermutationsProvider.IStaticContent

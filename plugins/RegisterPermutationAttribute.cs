@@ -1,4 +1,6 @@
-﻿namespace StagePermutations;
+﻿using SearchableAttribute = HG.Reflection.SearchableAttribute;
+
+namespace StagePermutations;
 
 public class RegisterPermutationAttribute : SearchableAttribute
 {
