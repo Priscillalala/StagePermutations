@@ -46,7 +46,7 @@ public class RectShipMid : PermutationBehaviour, StagePermutationsPlugin.IAsyncI
         RectShipMidAlt.transform.localPosition = new Vector3(0, 47, 110);
         RectShipMidAlt.transform.localEulerAngles = new Vector3(10, 40, 0);
         RectShipMidAlt.AddComponent(out SetSceneObjectsActive setSceneObjectsActive);
-        setSceneObjectsActive.objectsToDeactivate.Add(environmentHolder.transform.Find("HOLDER: Main Spikes/Spikes In Play.007")?.gameObject);
+        setSceneObjectsActive.objectsToDeactivate.Add(environmentHolder.transform.FindGameObject("HOLDER: Main Spikes/Spikes In Play.007"));
 
         if (environmentHolder.transform.TryFind("HOLDER: Main Spikes/Spikes In Play.003", out Transform spike))
         {

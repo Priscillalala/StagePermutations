@@ -88,13 +88,13 @@ public class LowerStaircase : PermutationBehaviour, StagePermutationsPlugin.IAsy
         disabled.AddComponent<GateStateSetter>().gateToDisableWhenEnabled = GATE_NAME;
         disabled.SetActive(false);
         disabled.AddComponent(out SetSceneObjectsActive setSceneObjectsActive);
-        setSceneObjectsActive.objectsToDeactivate.Add(WPPlatform2.Find("WPPlatform2SpiralStairsCW")?.gameObject);
-        setSceneObjectsActive.objectsToDeactivate.Add(WPPlatform2.Find("WPPlatform2SpiralStairsCCW")?.gameObject);
-        setSceneObjectsActive.objectsToDeactivate.Add(WPPlatform2.Find("WPPlanter1Long (4)")?.gameObject);
-        setSceneObjectsActive.objectsToDeactivate.Add(WPPlatform2.Find("WPPlanter1Long (3)")?.gameObject);
-        setSceneObjectsActive.objectsToDeactivate.Add(WPPlatform2.Find("WPPlanter1KnockedOver")?.gameObject);
-        setSceneObjectsActive.objectsToDeactivate.Add(WPPlatform2.Find("WPPlanter1LongKnockedOver")?.gameObject);
-        setSceneObjectsActive.objectsToDeactivate.Add(WPPlatform2.Find("WPPlanter1WithBonsaiTree (9)")?.gameObject);
+        setSceneObjectsActive.objectsToDeactivate.Add(WPPlatform2.FindGameObject("WPPlatform2SpiralStairsCW"));
+        setSceneObjectsActive.objectsToDeactivate.Add(WPPlatform2.FindGameObject("WPPlatform2SpiralStairsCCW"));
+        setSceneObjectsActive.objectsToDeactivate.Add(WPPlatform2.FindGameObject("WPPlanter1Long (4)"));
+        setSceneObjectsActive.objectsToDeactivate.Add(WPPlatform2.FindGameObject("WPPlanter1Long (3)"));
+        setSceneObjectsActive.objectsToDeactivate.Add(WPPlatform2.FindGameObject("WPPlanter1KnockedOver"));
+        setSceneObjectsActive.objectsToDeactivate.Add(WPPlatform2.FindGameObject("WPPlanter1LongKnockedOver"));
+        setSceneObjectsActive.objectsToDeactivate.Add(WPPlatform2.FindGameObject("WPPlanter1WithBonsaiTree (9)"));
         Transform barrier1 = WPPlatform2.Cast<Transform>().Where(x => x.name == "WPPlatform2BarrierHigh").ElementAtOrDefault(2);
         if (barrier1)
         {

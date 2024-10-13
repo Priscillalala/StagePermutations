@@ -18,7 +18,10 @@ public class StumpToTree : PermutationBehaviour
         GameObject treeTrunk = Object.Instantiate(CompositeTreeTrunk.gameObject, CompositeTreeTrunk.parent);
         treeTrunk.SetActive(false);
         treeTrunk.transform.localPosition = new Vector3(-117, -151, -241);
-        treeTrunk.transform.Find("FSTreeTrunkEnormousCollision (2)")?.gameObject.SetActive(false);
+        if (treeTrunk.transform.TryFind("FSTreeTrunkEnormousCollision (2)", out Transform FSTreeTrunkEnormousCollision2))
+        {
+            FSTreeTrunkEnormousCollision2.gameObject.SetActive(false);
+        }
         if (treeTrunk.transform.TryFind("FSTreeTrunkEnormousCollision", out Transform FSTreeTrunkEnormousCollision))
         {
             FSTreeTrunkEnormousCollision.localPosition = new Vector3(0, -5, 0);

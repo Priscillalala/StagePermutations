@@ -61,8 +61,8 @@ public class SecondAqueduct : PermutationBehaviour, StagePermutationsPlugin.IAsy
         }
         if (rootObjects.TryGetValue("HOLDER: Warning Flags", out GameObject warningFlagsHolder))
         {
-            setSceneObjectsActive.objectsToDeactivate.Add(warningFlagsHolder.transform.Find("GLWarningFlag")?.gameObject);
-            setSceneObjectsActive.objectsToDeactivate.Add(warningFlagsHolder.transform.Find("GLWarningFlag (2)")?.gameObject);
+            setSceneObjectsActive.objectsToDeactivate.Add(warningFlagsHolder.transform.FindGameObject("GLWarningFlag"));
+            setSceneObjectsActive.objectsToDeactivate.Add(warningFlagsHolder.transform.FindGameObject("GLWarningFlag (2)"));
         }
         if (gameplaySpaceHolder.transform.TryFind("Gates/BridgeOverGooOff", out Transform BridgeOverGooOff))
         {

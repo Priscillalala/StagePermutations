@@ -62,7 +62,7 @@ public class IslandPlatform : PermutationBehaviour, StagePermutationsPlugin.IAsy
         disabled.AddComponent<GateStateSetter>().gateToDisableWhenEnabled = GATE_NAME;
         disabled.SetActive(false);
         disabled.AddComponent(out SetSceneObjectsActive setSceneObjectsActive);
-        setSceneObjectsActive.objectsToDeactivate.Add(terrainHolder.transform.Find("mdlAncientLoft_FBridge (2)")?.gameObject);
+        setSceneObjectsActive.objectsToDeactivate.Add(terrainHolder.transform.FindGameObject("mdlAncientLoft_FBridge (2)"));
 
         GameObject bridgeEdge = new GameObject("Edging the bridge");
         bridgeEdge.transform.SetParent(disabled.transform, false);

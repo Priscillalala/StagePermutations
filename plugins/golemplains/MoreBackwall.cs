@@ -34,8 +34,6 @@ public class MoreBackwall : PermutationBehaviour, StagePermutationsPlugin.IAsync
 
     public override void Apply(Scene scene, IDictionary<string, GameObject> rootObjects, SceneObjectToggleGroup toggleGroupController)
     {
-        GameObject.CreatePrimitive(PrimitiveType.Cube);
-        GameObject.CreatePrimitive(PrimitiveType.Sphere);
         GameObject backwall = Object.Instantiate(Addressable<GameObject>("RoR2/Base/dampcave/DCTerrainBackwall.prefab"));
         backwall.transform.localPosition = new Vector3(253f, -42f, -310f);
         backwall.transform.localEulerAngles = new Vector3(270, 112, 0);

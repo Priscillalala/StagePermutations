@@ -32,7 +32,11 @@ public class ShroomShelf : PermutationBehaviour, StagePermutationsPlugin.IAsyncI
     {
         if (rootObjects.TryGetValue("SceneInfo", out GameObject sceneInfo))
         {
-            return sceneInfo.transform.Find("SceneObjectToggleGroup")?.GetComponent<SceneObjectToggleGroup>();
+            Transform sceneObjectToggleGroup = sceneInfo.transform.Find("SceneObjectToggleGroup");
+            if (sceneObjectToggleGroup)
+            {
+                return sceneObjectToggleGroup.GetComponent<SceneObjectToggleGroup>();
+            }
         }
         return null;
     }
