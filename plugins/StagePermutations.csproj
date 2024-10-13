@@ -33,21 +33,27 @@
 	</ItemGroup>
 
 	<ItemDefinitionGroup>
-		<None TargetPath="%(Identity)" />
+		<None>
+			<TargetPath>%(Identity)</TargetPath>
+		</None>
 	</ItemDefinitionGroup>
 
 	<ItemGroup>
 		<None Include="..\CHANGELOG.md">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Visible>false</Visible>
 		</None>
 		<None Include="..\icon.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Visible>false</Visible>
 		</None>
 		<None Include="..\manifest.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Visible>false</Visible>
 		</None>
 		<None Include="..\README.md">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Visible>false</Visible>
 		</None>
 	</ItemGroup>
 
