@@ -13,7 +13,7 @@ public class NewTorusShip : PermutationBehaviour, StagePermutationsPlugin.IAsync
     {
         var shipgraveyardGroundNodeNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/shipgraveyard/shipgraveyardGroundNodeNodegraph.asset");
         var shipgraveyardAirNodeNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/shipgraveyard/shipgraveyardAirNodeNodegraph.asset");
-        
+
         List<NodeGraph.NodeIndex> dest = [];
 
         yield return shipgraveyardGroundNodeNodegraph;

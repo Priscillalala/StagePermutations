@@ -46,7 +46,7 @@ public class RectShipMid : PermutationBehaviour, StagePermutationsPlugin.IAsyncI
         RectShipMidAlt.transform.localPosition = new Vector3(0, 47, 110);
         RectShipMidAlt.transform.localEulerAngles = new Vector3(10, 40, 0);
         RectShipMidAlt.AddComponent(out SetSceneObjectsActive setSceneObjectsActive);
-        
+
         if (environmentHolder.transform.TryFind("HOLDER: Main Spikes", out Transform mainSpikes))
         {
             Transform overlappingSpike = mainSpikes.GetChild(6);
