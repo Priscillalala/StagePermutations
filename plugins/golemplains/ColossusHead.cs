@@ -11,7 +11,7 @@ public class ColossusHead : PermutationBehaviour, StagePermutationsPlugin.IAsync
     const string GATE_NAME_FULL = "BlockedByFullColossusHead";
 
     public IEnumerator Init()
-    {
+    {   
         var golemplains2GroundNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/golemplains2/golemplains2GroundNodesNodegraph.asset");
         var golemplains2AirNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/golemplains2/golemplains2AirNodesNodegraph.asset");
 
@@ -64,7 +64,8 @@ public class ColossusHead : PermutationBehaviour, StagePermutationsPlugin.IAsync
         {
             return;
         }
-        if (!ruinsHolder.transform.TryFind("GPRuinedRing1 (1)", out Transform ruinedRing))
+        Transform ruinedRing = ruinsHolder.transform.Cast<Transform>().Where(x => x.name == "GPRuinedRing1").ElementAtOrDefault(1);
+        if (ruinedRing)
         {
             return;
         }
@@ -97,7 +98,7 @@ public class ColossusHead : PermutationBehaviour, StagePermutationsPlugin.IAsync
         {
             return;
         }
-        Transform GPTerrainColumn = columnsHolder.transform.AllChildren().Where(x => x.name == "GPTerrainColumn").ElementAtOrDefault(2);
+        Transform GPTerrainColumn = columnsHolder.transform.AllChildren().Where(x => x.name == "GP_TerrainColumn").ElementAtOrDefault(2);
         if (!GPTerrainColumn)
         {
             return;

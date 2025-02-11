@@ -11,7 +11,7 @@ public class StumpToTree : PermutationBehaviour
         {
             return;
         }
-        if (!treeTrunksHolder.transform.TryFind("CompositeTreeTrunk", out Transform CompositeTreeTrunk) || !treeTrunksHolder.transform.TryFind("FSTreeTrunkStumpCollision (5)", out Transform FSTreeTrunkStumpCollision))
+        if (!treeTrunksHolder.transform.TryFind("CompositeTreeTrunk", out Transform CompositeTreeTrunk) || !treeTrunksHolder.transform.TryFind("FSTreeTrunkStumpLarge", out Transform FSTreeTrunkStumpLarge))
         {
             return;
         }
@@ -45,7 +45,7 @@ public class StumpToTree : PermutationBehaviour
         treeTrunk.AddComponent<DisableOcclusionNearby>().radius = 50f;
         ArrayUtils.ArrayAppend(ref toggleGroupController.toggleGroups, new GameObjectToggleGroup
         {
-            objects = [FSTreeTrunkStumpCollision.gameObject, treeTrunk],
+            objects = [FSTreeTrunkStumpLarge.gameObject, treeTrunk],
             minEnabled = 1,
             maxEnabled = 1,
         });

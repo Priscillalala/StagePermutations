@@ -7,7 +7,7 @@ namespace StagePermutations.golemplains;
 [RegisterPermutation("golemplains", "Titanic Plains", "Longer Backwall", description = "The backwall on the original Titanic Plains variant will sometimes extend to the edge of the stage")]
 public class MoreBackwall : PermutationBehaviour, StagePermutationsPlugin.IAsyncInit
 {
-    const string GATE_NAME = "BlockedByFullColossusHead";
+    const string GATE_NAME = "BlockedByLongerBackwall";
 
     public IEnumerator Init()
     {

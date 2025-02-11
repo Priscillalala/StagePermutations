@@ -34,7 +34,7 @@ public class MoreRuins : PermutationBehaviour, StagePermutationsPlugin.IAsyncIni
         {
             return;
         }
-        if (!gameplaySpace.transform.TryFind("BbRuinGate_LOD0 (2)", out Transform BbRuinGate))
+        if (!gameplaySpace.transform.TryFind("Ruins/BbRuinArch_LOD0 (2)", out Transform BbRuinGate))
         {
             return;
         }
@@ -43,10 +43,10 @@ public class MoreRuins : PermutationBehaviour, StagePermutationsPlugin.IAsyncIni
         moreRuins.SetActive(false);
         moreRuins.transform.SetParent(gameplaySpace.transform, false);
         GameObject ruinGate = Object.Instantiate(BbRuinGate.gameObject, moreRuins.transform);
-        ruinGate.transform.localPosition = new Vector3(130f, -135f, -74.5f);
+        ruinGate.transform.localPosition = new Vector3(120f, -143f, -74.5f);
 
         Addressable("RoR2/Base/blackbeach/BbRuinStep1_LOD0.fbx", out Mesh BbRuinStep1Mesh);
-        if (gameplaySpace.transform.TryFind("BbRuinStep1_LOD0 (1)", out Transform BbRuinStep1))
+        if (gameplaySpace.transform.TryFind("Ruins/BbRuinStep1_LOD0 (1)", out Transform BbRuinStep1))
         {
             GameObject step1 = Object.Instantiate(BbRuinStep1.gameObject, moreRuins.transform);
             step1.GetComponent<MeshFilter>().sharedMesh = BbRuinStep1Mesh;

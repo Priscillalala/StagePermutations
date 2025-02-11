@@ -27,25 +27,25 @@ public class RecededAqueduct : PermutationBehaviour, StagePermutationsPlugin.IAs
     {
         if (!goolakeBoulderPrefab)
         {
-            goolakeBoulderPrefab = Prefab.Clone(Addressable<GameObject>("RoR2/Base/golemplains2/BBBoulderMediumRound1.prefab"), "GlBoulderApproximation");
-            goolakeBoulderPrefab.GetComponent<MeshRenderer>().sharedMaterial = Addressable<Material>("RoR2/Base/goolake/matGoolakeRocks.mat");
+            goolakeBoulderPrefab = Addressable<GameObject>("RoR2/Base/goolake/GL_BBBoulder.prefab");
+            //goolakeBoulderPrefab.GetComponent<MeshRenderer>().sharedMaterial = Addressable<Material>("RoR2/Base/goolake/matGoolakeRocks.mat");
         }
         if (!rootObjects.TryGetValue("HOLDER: GameplaySpace", out GameObject gameplaySpaceHolder))
         {
             return;
         }
-        if (!gameplaySpaceHolder.transform.TryFind("Terrain/mdlGlDam/mdlGlAqueductPartial", out Transform mdlGlAqueductPartial))
+        if (!gameplaySpaceHolder.transform.TryFind("mdlGlDam/GL_AqueductPartial", out Transform GL_AqueductPartial))
         {
             return;
         }
-        Transform mdlGlAqueductReceded = Object.Instantiate(mdlGlAqueductPartial.gameObject, mdlGlAqueductPartial.parent).transform;
+        Transform mdlGlAqueductReceded = Object.Instantiate(GL_AqueductPartial.gameObject, GL_AqueductPartial.parent).transform;
         mdlGlAqueductReceded.localPosition = new Vector3(-0.89f, 1.2f, -0.53f);
         mdlGlAqueductReceded.localEulerAngles = new Vector3(0f, 2f, 0f);
         mdlGlAqueductReceded.localScale = new Vector3(1.225f, 1.263564f, 0.9f);
         mdlGlAqueductReceded.gameObject.AddComponent<GateStateSetter>().gateToDisableWhenEnabled = GATE_NAME;
         mdlGlAqueductReceded.gameObject.SetActive(false);
         mdlGlAqueductReceded.gameObject.AddComponent(out SetSceneObjectsActive setSceneObjectsActive);
-        if (mdlGlAqueductReceded.TryFind("GooWaterfall", out Transform GooWaterfall))
+        if (mdlGlAqueductReceded.TryFind("GL_Waterfall", out Transform GooWaterfall))
         {
             GooWaterfall.gameObject.SetActive(false);
         }
@@ -53,7 +53,7 @@ public class RecededAqueduct : PermutationBehaviour, StagePermutationsPlugin.IAs
         {
             if (miscPropsHolder.transform.TryFind("Props", out Transform props))
             {
-                Transform eelSkeleton = props.AllChildren().FirstOrDefault(x => !x.gameObject.activeSelf && x.gameObject.name == "EelSkeleton");
+                Transform eelSkeleton = props.Cast<Transform>().Where(x => x.gameObject.name == "GL_EelSkeleton").ElementAt(1);
                 if (eelSkeleton)
                 {
                     Transform archEelSkeleton = Object.Instantiate(eelSkeleton.gameObject, eelSkeleton.parent).transform;
@@ -94,13 +94,13 @@ public class RecededAqueduct : PermutationBehaviour, StagePermutationsPlugin.IAs
         propInstances[6].transform.localScale = Vector3.one * 0.8f;
         foreach (GameObject prop in propInstances)
         {
-            prop.gameObject.SetActive(false);
+            prop.SetActive(false);
         }
         setSceneObjectsActive.objectsToActivate.AddRange(propInstances);
 
         ArrayUtils.ArrayAppend(ref toggleGroupController.toggleGroups, new GameObjectToggleGroup
         {
-            objects = [mdlGlAqueductPartial.gameObject, mdlGlAqueductReceded.gameObject],
+            objects = [GL_AqueductPartial.gameObject, mdlGlAqueductReceded.gameObject],
             minEnabled = 1,
             maxEnabled = 1,
         });

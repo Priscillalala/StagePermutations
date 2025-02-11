@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 using SearchableAttribute = HG.Reflection.SearchableAttribute;
 
 [module: UnverifiableCode]
-#pragma warning disable
-[assembly: SecurityPermission(System.Security.Permissions.SecurityAction.RequestMinimum, SkipVerification = true)]
-#pragma warning restore
+#pragma warning disable CS0618 // Type or member is obsolete
+[assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
+#pragma warning restore CS0618 // Type or member is obsolete
 [assembly: SearchableAttribute.OptIn]
 
 namespace StagePermutations;
@@ -19,7 +19,7 @@ public class StagePermutationsPlugin : BaseUnityPlugin
     public const string
         GUID = "groovesalad." + NAME,
         NAME = "StageVariety",
-        VERSION = "1.0.0";
+        VERSION = "1.1.0";
 
     public static Dictionary<PermutationBehaviour, RegisterPermutationAttribute> Permutations { get; private set; }
 

@@ -75,7 +75,7 @@ public class IslandPlatform : PermutationBehaviour, StagePermutationsPlugin.IAsy
         bonsai2.transform.localPosition = new Vector3(182f, 18.8f, -42f);
         bonsai2.transform.eulerAngles = new Vector3(0, 213, 0);
 
-        GameObject pillar = Object.Instantiate(Addressable<GameObject>("RoR2/DLC1/ancientloft/AncientLoft_PillarHalfIntactSimpler.prefab"), disabled.transform);
+        GameObject pillar = Object.Instantiate(Addressable<GameObject>("RoR2/DLC1/ancientloft/AL_PillarHalfIntactSimpler.prefab"), disabled.transform);
         pillar.transform.localPosition = new Vector3(195, -10, 39);
 
         /*GameObject largeFountain = Object.Instantiate(Addressable<GameObject>("RoR2/DLC1/ancientloft/AncientLoft_FountainLG.prefab"), disabled.transform);
@@ -92,11 +92,11 @@ public class IslandPlatform : PermutationBehaviour, StagePermutationsPlugin.IAsy
         circleArchway.transform.localPosition = new Vector3(310f, -7f, -111.19f);
         circleArchway.transform.eulerAngles = new Vector3(270, 90, 0);*/
 
-        GameObject templeShrine = Object.Instantiate(Addressable<GameObject>("RoR2/DLC1/ancientloft/AncientLoft_TempleShrine.prefab"), disabled.transform);
+        GameObject templeShrine = Object.Instantiate(Addressable<GameObject>("RoR2/DLC1/ancientloft/AL_TempleShrine.prefab"), disabled.transform);
         templeShrine.transform.localPosition = new Vector3(175f, 19.9f, -28.3f);
         templeShrine.transform.eulerAngles = new Vector3(0, 90, 0);
 
-        GameObject spinningRocks = Object.Instantiate(Addressable<GameObject>("RoR2/DLC1/ancientloft/AncientLoft_SpnningRocks.prefab"), disabled.transform);
+        GameObject spinningRocks = Object.Instantiate(Addressable<GameObject>("RoR2/DLC1/ancientloft/AL_SpnningRocks.prefab"), disabled.transform);
         spinningRocks.transform.localPosition = new Vector3(190, 25, -45);
         spinningRocks.transform.eulerAngles = new Vector3(0, 40, 0);
 

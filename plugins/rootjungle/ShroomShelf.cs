@@ -47,7 +47,12 @@ public class ShroomShelf : PermutationBehaviour, StagePermutationsPlugin.IAsyncI
         {
             return;
         }
-        if (!propsHolder.transform.TryFind("GROUP: Mushrooms/RJShroomBig", out Transform RJShroomBig))
+        if (!propsHolder.transform.TryFind("GROUP: Mushrooms", out Transform Mushrooms))
+        {
+            return;
+        }
+        Transform RJShroomBig = Mushrooms.Cast<Transform>().Where(x => x.name == "RJ_ShroomBig").ElementAtOrDefault(1);
+        if (!RJShroomBig)
         {
             return;
         }

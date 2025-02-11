@@ -36,7 +36,7 @@ public class NewTorusShip : PermutationBehaviour, StagePermutationsPlugin.IAsync
         TorusShipRound.SetActive(false);
         TorusShipRound.transform.localPosition = new Vector3(2, 5, 41);
         TorusShipRound.transform.localEulerAngles = new Vector3(340, 300, 230);
-        if (rootObjects.TryGetValue("HOLDER: Environment", out GameObject environmentHolder) && environmentHolder.transform.TryFind("TO BE CONVERTED!!!!!!!!!!/HOLDER: Main Rocks", out Transform mainRocks))
+        if (rootObjects.TryGetValue("HOLDER: Environment", out GameObject environmentHolder) && environmentHolder.transform.TryFind("HOLDER: Main Rocks", out Transform mainRocks))
         {
             TorusShipRound.AddComponent(out SetSceneObjectsActive setSceneObjectsActive);
             setSceneObjectsActive.objectsToDeactivate.Add(mainRocks.GetChild(27).gameObject);

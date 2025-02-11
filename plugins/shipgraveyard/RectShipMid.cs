@@ -46,15 +46,24 @@ public class RectShipMid : PermutationBehaviour, StagePermutationsPlugin.IAsyncI
         RectShipMidAlt.transform.localPosition = new Vector3(0, 47, 110);
         RectShipMidAlt.transform.localEulerAngles = new Vector3(10, 40, 0);
         RectShipMidAlt.AddComponent(out SetSceneObjectsActive setSceneObjectsActive);
-        setSceneObjectsActive.objectsToDeactivate.Add(environmentHolder.transform.FindGameObject("HOLDER: Main Spikes/Spikes In Play.007"));
-
-        if (environmentHolder.transform.TryFind("HOLDER: Main Spikes/Spikes In Play.003", out Transform spike))
+        
+        if (environmentHolder.transform.TryFind("HOLDER: Main Spikes", out Transform mainSpikes))
         {
-            GameObject newSpike = Object.Instantiate(spike.gameObject, spike.parent);
-            newSpike.transform.localPosition = new Vector3(-40, 10, 94);
-            newSpike.transform.localScale = new Vector3(903.583f, 903.586f, 3921.5f);
-            newSpike.SetActive(false);
-            setSceneObjectsActive.objectsToActivate.Add(newSpike);
+            Transform overlappingSpike = mainSpikes.GetChild(6);
+            if (overlappingSpike)
+            {
+                setSceneObjectsActive.objectsToDeactivate.Add(overlappingSpike.gameObject);
+            }
+
+            Transform newSpikeOriginal = mainSpikes.GetChild(2);
+            if (newSpikeOriginal)
+            {
+                GameObject newSpike = Object.Instantiate(newSpikeOriginal.gameObject, newSpikeOriginal.parent);
+                newSpike.transform.localPosition = new Vector3(-40, 10, 94);
+                newSpike.transform.localScale = new Vector3(903.583f, 903.586f, 3921.5f);
+                newSpike.SetActive(false);
+                setSceneObjectsActive.objectsToActivate.Add(newSpike);
+            }
         }
 
         ArrayUtils.ArrayAppend(ref toggleGroupController.toggleGroups, new GameObjectToggleGroup
