@@ -14,10 +14,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="ancientloft\IslandPlatform.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="BepInEx.Core" Version="5.4.21" />
 		<PackageReference Include="UnityEngine.Modules" Version="2021.3.33" />
 		<PackageReference Include="RiskOfRain2.GameLibs" Version="*-*" />
