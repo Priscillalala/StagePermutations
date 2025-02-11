@@ -26,8 +26,8 @@ public class ArchPaths : PermutationBehaviour
             return instance;
         }
 
-        InstantiateBrazier(new Vector3(148.8f, 23.4f, -51.5f), Quaternion.Euler(-9, 5, 6));
-        InstantiateBrazier(new Vector3(118.3f, 11.2f, -64.7f), Quaternion.Euler(-9, 0, 6));
+        InstantiateBrazier(new Vector3(148.8f, 23.4f, -51.5f), Quaternion.Euler(0, 5, 6));
+        InstantiateBrazier(new Vector3(118.3f, 11.2f, -64.7f), Quaternion.Euler(0, 0, 6));
 
         ArrayUtils.ArrayAppend(ref toggleGroupController.toggleGroups, new GameObjectToggleGroup
         {

@@ -11,9 +11,11 @@ You can find a list of every feature with pictures on the [Stage Variety wiki](h
 <img src="https://github.com/Priscillalala/StagePermutations/blob/master/media/ruingate.png?raw=true" alt="ruin gate showcase" width = 50%><img src="https://github.com/Priscillalala/StagePermutations/blob/master/media/tree.png?raw=true" alt="tree showcase" width = 50%>
 
 ## Contact
-You can find me in the [RoR2 Modding Server](https://discord.gg/5MbXZvd) @Groove_Salad
+You can find me in the [RoR2 Modding Server](https://discord.gg/5MbXZvd) @groove_salad
 
 Or, you can post issues and feedback on the [GitHub](https://github.com/Priscillalala/StagePermutations/issues)
 
 ## Donations
+If you have a good time, consider buying me a coffee!
+
 <a href="https://www.buymeacoffee.com/groovesalad" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height=60 width=217></a>
