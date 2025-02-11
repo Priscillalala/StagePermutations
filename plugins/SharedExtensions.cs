@@ -10,6 +10,13 @@ public static class SharedExtensions
         return child = transform.Find(n);
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static GameObject FindGameObject(this Transform transform, string n)
+    {
+        Transform child = transform.Find(n);
+        return child ? child.gameObject : null;
+    }
+
     public static IEnumerable<Transform> AllChildren(this Transform transform)
     {
         for (int i = 0; i < transform.childCount; i++)

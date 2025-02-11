@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.goolake;
 
 [RegisterPermutation("goolake", "Abandoned Aqueduct", "Receded Aqueduct", description = "The main aqueduct on Abandoned Aqueduct will sometimes move towards the wall to make room for a new eel skeleton")]
-public class RecededAqueduct : PermutationBehaviour, StagePermutationsProvider.IStaticContent
+public class RecededAqueduct : PermutationBehaviour, StagePermutationsPlugin.IAsyncInit
 {
     const string GATE_NAME = "BlockedByEel";
 
-    public IEnumerator LoadAsync(IProgress<float> progressReceiver)
+    public IEnumerator Init()
     {
         var goolakeAirNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/goolake/goolakeAirNodegraph.asset");
 
@@ -27,25 +27,25 @@ public class RecededAqueduct : PermutationBehaviour, StagePermutationsProvider.I
     {
         if (!goolakeBoulderPrefab)
         {
-            goolakeBoulderPrefab = Prefab.Clone(Addressable<GameObject>("RoR2/Base/golemplains2/BBBoulderMediumRound1.prefab"), "GlBoulderApproximation");
-            goolakeBoulderPrefab.GetComponent<MeshRenderer>().sharedMaterial = Addressable<Material>("RoR2/Base/goolake/matGoolakeRocks.mat");
+            goolakeBoulderPrefab = Addressable<GameObject>("RoR2/Base/goolake/GL_BBBoulder.prefab");
+            //goolakeBoulderPrefab.GetComponent<MeshRenderer>().sharedMaterial = Addressable<Material>("RoR2/Base/goolake/matGoolakeRocks.mat");
         }
         if (!rootObjects.TryGetValue("HOLDER: GameplaySpace", out GameObject gameplaySpaceHolder))
         {
             return;
         }
-        if (!gameplaySpaceHolder.transform.TryFind("Terrain/mdlGlDam/mdlGlAqueductPartial", out Transform mdlGlAqueductPartial))
+        if (!gameplaySpaceHolder.transform.TryFind("mdlGlDam/GL_AqueductPartial", out Transform GL_AqueductPartial))
         {
             return;
         }
-        Transform mdlGlAqueductReceded = Object.Instantiate(mdlGlAqueductPartial.gameObject, mdlGlAqueductPartial.parent).transform;
+        Transform mdlGlAqueductReceded = Object.Instantiate(GL_AqueductPartial.gameObject, GL_AqueductPartial.parent).transform;
         mdlGlAqueductReceded.localPosition = new Vector3(-0.89f, 1.2f, -0.53f);
         mdlGlAqueductReceded.localEulerAngles = new Vector3(0f, 2f, 0f);
         mdlGlAqueductReceded.localScale = new Vector3(1.225f, 1.263564f, 0.9f);
         mdlGlAqueductReceded.gameObject.AddComponent<GateStateSetter>().gateToDisableWhenEnabled = GATE_NAME;
         mdlGlAqueductReceded.gameObject.SetActive(false);
         mdlGlAqueductReceded.gameObject.AddComponent(out SetSceneObjectsActive setSceneObjectsActive);
-        if (mdlGlAqueductReceded.TryFind("GooWaterfall", out Transform GooWaterfall))
+        if (mdlGlAqueductReceded.TryFind("GL_Waterfall", out Transform GooWaterfall))
         {
             GooWaterfall.gameObject.SetActive(false);
         }
@@ -53,23 +53,20 @@ public class RecededAqueduct : PermutationBehaviour, StagePermutationsProvider.I
         {
             if (miscPropsHolder.transform.TryFind("Props", out Transform props))
             {
-                Transform eelSkeleton = props.AllChildren().FirstOrDefault(x => !x.gameObject.activeSelf && x.gameObject.name == "EelSkeleton");
-                if (eelSkeleton)
-                {
-                    Transform archEelSkeleton = Object.Instantiate(eelSkeleton.gameObject, eelSkeleton.parent).transform;
-                    archEelSkeleton.localPosition = new Vector3(19.4f, -27f, -78f);
-                    archEelSkeleton.localEulerAngles = new Vector3(53f, 78f, 339f);
-                    archEelSkeleton.localScale = Vector3.one * 14.4f;
-                    archEelSkeleton.gameObject.SetActive(false);
-                    setSceneObjectsActive.objectsToActivate.Add(archEelSkeleton.gameObject);
+                Addressable("RoR2/Base/goolake/GL_EelSkeleton.prefab", out GameObject GL_EelSkeleton);
+                Transform archEelSkeleton = Object.Instantiate(GL_EelSkeleton, props).transform;
+                archEelSkeleton.localPosition = new Vector3(19.4f, -27.32f, -78f);
+                archEelSkeleton.localEulerAngles = new Vector3(53f, 78f, 339f);
+                archEelSkeleton.localScale = Vector3.one * 14.4f;
+                archEelSkeleton.gameObject.SetActive(false);
+                setSceneObjectsActive.objectsToActivate.Add(archEelSkeleton.gameObject);
 
-                    Transform eelSkeletonTail = Object.Instantiate(eelSkeleton.gameObject, eelSkeleton.parent).transform;
-                    eelSkeletonTail.localPosition = new Vector3(-79f, -87f, -128f);
-                    eelSkeletonTail.localEulerAngles = new Vector3(25f, 226f, 173f);
-                    eelSkeletonTail.localScale = Vector3.one * 9f;
-                    eelSkeletonTail.gameObject.SetActive(false);
-                    setSceneObjectsActive.objectsToActivate.Add(eelSkeletonTail.gameObject);
-                }
+                Transform eelSkeletonTail = Object.Instantiate(GL_EelSkeleton, props).transform;
+                eelSkeletonTail.localPosition = new Vector3(-79f, -87f, -128f);
+                eelSkeletonTail.localEulerAngles = new Vector3(25f, 226f, 173f);
+                eelSkeletonTail.localScale = Vector3.one * 9f;
+                eelSkeletonTail.gameObject.SetActive(false);
+                setSceneObjectsActive.objectsToActivate.Add(eelSkeletonTail.gameObject);
             }
         }
         Addressable("RoR2/Base/goolake/spmGlBamboo1Large.spm", out GameObject spmGlBamboo1Large);
@@ -94,13 +91,13 @@ public class RecededAqueduct : PermutationBehaviour, StagePermutationsProvider.I
         propInstances[6].transform.localScale = Vector3.one * 0.8f;
         foreach (GameObject prop in propInstances)
         {
-            prop.gameObject.SetActive(false);
+            prop.SetActive(false);
         }
         setSceneObjectsActive.objectsToActivate.AddRange(propInstances);
 
         ArrayUtils.ArrayAppend(ref toggleGroupController.toggleGroups, new GameObjectToggleGroup
         {
-            objects = [mdlGlAqueductPartial.gameObject, mdlGlAqueductReceded.gameObject],
+            objects = [GL_AqueductPartial.gameObject, mdlGlAqueductReceded.gameObject],
             minEnabled = 1,
             maxEnabled = 1,
         });

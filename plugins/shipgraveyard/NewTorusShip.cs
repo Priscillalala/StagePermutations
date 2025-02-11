@@ -5,15 +5,15 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.shipgraveyard;
 
 [RegisterPermutation("shipgraveyard", "Siren`s Call", "New Donut Ship", description = "A new crashed ship will sometimes appear in the middle of Siren`s Call")]
-public class NewTorusShip : PermutationBehaviour, StagePermutationsProvider.IStaticContent
+public class NewTorusShip : PermutationBehaviour, StagePermutationsPlugin.IAsyncInit
 {
     const string GATE_NAME = "BlockedByTorusShip";
 
-    public IEnumerator LoadAsync(IProgress<float> progressReceiver)
+    public IEnumerator Init()
     {
         var shipgraveyardGroundNodeNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/shipgraveyard/shipgraveyardGroundNodeNodegraph.asset");
         var shipgraveyardAirNodeNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/shipgraveyard/shipgraveyardAirNodeNodegraph.asset");
-        
+
         List<NodeGraph.NodeIndex> dest = [];
 
         yield return shipgraveyardGroundNodeNodegraph;
@@ -36,7 +36,7 @@ public class NewTorusShip : PermutationBehaviour, StagePermutationsProvider.ISta
         TorusShipRound.SetActive(false);
         TorusShipRound.transform.localPosition = new Vector3(2, 5, 41);
         TorusShipRound.transform.localEulerAngles = new Vector3(340, 300, 230);
-        if (rootObjects.TryGetValue("HOLDER: Environment", out GameObject environmentHolder) && environmentHolder.transform.TryFind("TO BE CONVERTED!!!!!!!!!!/HOLDER: Main Rocks", out Transform mainRocks))
+        if (rootObjects.TryGetValue("HOLDER: Environment", out GameObject environmentHolder) && environmentHolder.transform.TryFind("HOLDER: Main Rocks", out Transform mainRocks))
         {
             TorusShipRound.AddComponent(out SetSceneObjectsActive setSceneObjectsActive);
             setSceneObjectsActive.objectsToDeactivate.Add(mainRocks.GetChild(27).gameObject);

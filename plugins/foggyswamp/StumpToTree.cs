@@ -11,14 +11,17 @@ public class StumpToTree : PermutationBehaviour
         {
             return;
         }
-        if (!treeTrunksHolder.transform.TryFind("CompositeTreeTrunk", out Transform CompositeTreeTrunk) || !treeTrunksHolder.transform.TryFind("FSTreeTrunkStumpCollision (5)", out Transform FSTreeTrunkStumpCollision))
+        if (!treeTrunksHolder.transform.TryFind("CompositeTreeTrunk", out Transform CompositeTreeTrunk) || !treeTrunksHolder.transform.TryFind("FSTreeTrunkStumpLarge", out Transform FSTreeTrunkStumpLarge))
         {
             return;
         }
         GameObject treeTrunk = Object.Instantiate(CompositeTreeTrunk.gameObject, CompositeTreeTrunk.parent);
         treeTrunk.SetActive(false);
         treeTrunk.transform.localPosition = new Vector3(-117, -151, -241);
-        treeTrunk.transform.Find("FSTreeTrunkEnormousCollision (2)")?.gameObject.SetActive(false);
+        if (treeTrunk.transform.TryFind("FSTreeTrunkEnormousCollision (2)", out Transform FSTreeTrunkEnormousCollision2))
+        {
+            FSTreeTrunkEnormousCollision2.gameObject.SetActive(false);
+        }
         if (treeTrunk.transform.TryFind("FSTreeTrunkEnormousCollision", out Transform FSTreeTrunkEnormousCollision))
         {
             FSTreeTrunkEnormousCollision.localPosition = new Vector3(0, -5, 0);
@@ -42,7 +45,7 @@ public class StumpToTree : PermutationBehaviour
         treeTrunk.AddComponent<DisableOcclusionNearby>().radius = 50f;
         ArrayUtils.ArrayAppend(ref toggleGroupController.toggleGroups, new GameObjectToggleGroup
         {
-            objects = [FSTreeTrunkStumpCollision.gameObject, treeTrunk],
+            objects = [FSTreeTrunkStumpLarge.gameObject, treeTrunk],
             minEnabled = 1,
             maxEnabled = 1,
         });

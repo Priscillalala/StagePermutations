@@ -5,22 +5,32 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.rootjungle;
 
 [RegisterPermutation("rootjungle", "Sundered Grove", "Mushroom Platform Variation", description = "A mushroom platform on Sundered Grove will sometimes disappear")]
-public class ShroomShelf : PermutationBehaviour, StagePermutationsProvider.IStaticContent
+public class ShroomShelf : PermutationBehaviour, StagePermutationsPlugin.IAsyncInit
 {
     const string GATE_NAME = "OnShroomShelf";
 
-    public IEnumerator LoadAsync(IProgress<float> progressReceiver)
+    public IEnumerator Init()
     {
+        // rootjungle mistakenly has two ground nodegraphs since sots
+        // The second nodegraph is used currently but we modify both in case that changes
         var rootjungleGroundNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/rootjungle/rootjungleGroundNodesNodegraph.asset");
+        var rootjungleGroundNodesNodegraph1 = Addressables.LoadAssetAsync<NodeGraph>("RoR2/rootjungleGroundNodesNodegraph.asset");
         var rootjungleAirNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/rootjungle/rootjungleAirNodesNodegraph.asset");
 
         List<NodeGraph.NodeIndex> dest = [];
 
         yield return rootjungleGroundNodesNodegraph;
-        NodeGraph groundNodegraph = rootjungleGroundNodesNodegraph.Result;
-        groundNodegraph.blockMap.GetItemsInSphere(new Vector3(63, 30, 90), 30f, dest);
-        AssignNodesToGate(groundNodegraph, dest, GATE_NAME);
-        dest.Clear();
+        ModifyRootjungleGroundNodesNodegraph(rootjungleGroundNodesNodegraph.Result);
+
+        yield return rootjungleGroundNodesNodegraph1;
+        ModifyRootjungleGroundNodesNodegraph(rootjungleGroundNodesNodegraph1.Result);
+
+        void ModifyRootjungleGroundNodesNodegraph(NodeGraph groundNodegraph)
+        {
+            groundNodegraph.blockMap.GetItemsInSphere(new Vector3(63, 30, 90), 30f, dest);
+            AssignNodesToGate(groundNodegraph, dest, GATE_NAME);
+            dest.Clear();
+        }
 
         yield return rootjungleAirNodesNodegraph;
         NodeGraph airNodegraph = rootjungleAirNodesNodegraph.Result;
@@ -32,7 +42,11 @@ public class ShroomShelf : PermutationBehaviour, StagePermutationsProvider.IStat
     {
         if (rootObjects.TryGetValue("SceneInfo", out GameObject sceneInfo))
         {
-            return sceneInfo.transform.Find("SceneObjectToggleGroup")?.GetComponent<SceneObjectToggleGroup>();
+            Transform sceneObjectToggleGroup = sceneInfo.transform.Find("SceneObjectToggleGroup");
+            if (sceneObjectToggleGroup)
+            {
+                return sceneObjectToggleGroup.GetComponent<SceneObjectToggleGroup>();
+            }
         }
         return null;
     }
@@ -43,7 +57,12 @@ public class ShroomShelf : PermutationBehaviour, StagePermutationsProvider.IStat
         {
             return;
         }
-        if (!propsHolder.transform.TryFind("GROUP: Mushrooms/RJShroomBig", out Transform RJShroomBig))
+        if (!propsHolder.transform.TryFind("GROUP: Mushrooms", out Transform Mushrooms))
+        {
+            return;
+        }
+        Transform RJShroomBig = Mushrooms.Cast<Transform>().Where(x => x.name == "RJ_ShroomBig").ElementAtOrDefault(1);
+        if (!RJShroomBig)
         {
             return;
         }

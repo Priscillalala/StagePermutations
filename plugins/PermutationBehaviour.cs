@@ -10,7 +10,11 @@ public abstract class PermutationBehaviour
     {
         if (rootObjects.TryGetValue("SceneInfo", out GameObject sceneInfo))
         {
-            return sceneInfo.transform.Find("ToggleGroupController")?.GetComponent<SceneObjectToggleGroup>();
+            Transform toggleGroupController = sceneInfo.transform.Find("ToggleGroupController");
+            if (toggleGroupController)
+            {
+                return toggleGroupController.GetComponent<SceneObjectToggleGroup>();
+            }
         }
         return null;
     }

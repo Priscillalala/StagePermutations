@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.goolake;
 
 [RegisterPermutation("goolake", "Abandoned Aqueduct", "Second Aqueduct", description = "A second aqueduct structure will sometimes appear on Abandoned Aqueduct")]
-public class SecondAqueduct : PermutationBehaviour, StagePermutationsProvider.IStaticContent
+public class SecondAqueduct : PermutationBehaviour, StagePermutationsPlugin.IAsyncInit
 {
     const string GATE_NAME = "SecondaryAqueduct";
 
-    public IEnumerator LoadAsync(IProgress<float> progressReceiver)
+    public IEnumerator Init()
     {
         var goolakeGroundNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/goolake/goolakeGroundNodegraph.asset");
         var goolakeAirNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/goolake/goolakeAirNodegraph.asset");
@@ -39,7 +39,7 @@ public class SecondAqueduct : PermutationBehaviour, StagePermutationsProvider.IS
         {
             return;
         }
-        if (!gameplaySpaceHolder.transform.TryFind("Terrain/mdlGlDam/mdlGlAqueductPartial", out Transform mdlGlAqueductPartial))
+        if (!gameplaySpaceHolder.transform.TryFind("mdlGlDam/GL_AqueductPartial", out Transform GL_AqueductPartial))
         {
             return;
         }
@@ -48,21 +48,21 @@ public class SecondAqueduct : PermutationBehaviour, StagePermutationsProvider.IS
         toggleableAqueduct.SetActive(false);
         toggleableAqueduct.AddComponent(out SetSceneObjectsActive setSceneObjectsActive);
         toggleableAqueduct.transform.localEulerAngles = new Vector3(0, 18.7f, 180f);
-        Transform mdlGlAqueductPartial2 = Object.Instantiate(mdlGlAqueductPartial.gameObject, toggleableAqueduct.transform).transform;
-        mdlGlAqueductPartial2.localPosition = new Vector3(-264.7861f, 94.7f, -158.4718f);
-        mdlGlAqueductPartial2.localScale = new Vector3(10f, 14.29f, 8f);
-        if (mdlGlAqueductPartial2.TryFind("GooWaterfall/FoamOverParticles", out Transform FoamOverParticles))
+        Transform GL_AqueductPartial_2 = Object.Instantiate(GL_AqueductPartial.gameObject, toggleableAqueduct.transform).transform;
+        GL_AqueductPartial_2.localPosition = new Vector3(-264.7861f, 94.7f, -158.4718f);
+        GL_AqueductPartial_2.localScale = new Vector3(10f, 14.29f, 8f);
+        if (GL_AqueductPartial_2.TryFind("GL_Waterfall/FoamOverParticles", out Transform FoamOverParticles))
         {
             FoamOverParticles.localScale = new Vector3(0.8f, 1f, 0.5f);
         }
-        if (mdlGlAqueductPartial2.TryFind("GooWaterfall/SplashZone, Directional", out Transform SplashZoneDirectional))
+        if (GL_AqueductPartial_2.TryFind("GL_Waterfall/SplashZone, Directional", out Transform SplashZoneDirectional))
         {
             SplashZoneDirectional.localPosition = SplashZoneDirectional.localPosition with { y = 2.5f };
         }
         if (rootObjects.TryGetValue("HOLDER: Warning Flags", out GameObject warningFlagsHolder))
         {
-            setSceneObjectsActive.objectsToDeactivate.Add(warningFlagsHolder.transform.Find("GLWarningFlag")?.gameObject);
-            setSceneObjectsActive.objectsToDeactivate.Add(warningFlagsHolder.transform.Find("GLWarningFlag (2)")?.gameObject);
+            setSceneObjectsActive.objectsToDeactivate.Add(warningFlagsHolder.transform.FindGameObject("GLWarningFlag"));
+            setSceneObjectsActive.objectsToDeactivate.Add(warningFlagsHolder.transform.FindGameObject("GLWarningFlag (2)"));
         }
         if (gameplaySpaceHolder.transform.TryFind("Gates/BridgeOverGooOff", out Transform BridgeOverGooOff))
         {

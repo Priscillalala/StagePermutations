@@ -9,11 +9,17 @@ public class SetSceneObjectsActive : MonoBehaviour
     {
         foreach (GameObject toActivate in objectsToActivate)
         {
-            toActivate?.SetActive(true);
+            if (toActivate)
+            {
+                toActivate.SetActive(true);
+            }
         }
         foreach (GameObject toDeactivate in objectsToDeactivate)
         {
-            toDeactivate?.SetActive(false);
+            if (toDeactivate)
+            {
+                toDeactivate.SetActive(false);
+            }
         }
     }
 }

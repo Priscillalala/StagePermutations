@@ -8,7 +8,7 @@ static class Prefab
 
     static Prefab()
     {
-        _prefabParent = new GameObject(StagePermutationsProvider.GUID + "_Prefabs").transform;
+        _prefabParent = new GameObject(StagePermutationsPlugin.GUID + "_Prefabs").transform;
         _prefabParent.gameObject.SetActive(false);
         Object.DontDestroyOnLoad(_prefabParent.gameObject);
         On.RoR2.Util.IsPrefab += (orig, gameObject) => orig(gameObject) || gameObject.transform.parent == _prefabParent;

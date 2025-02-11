@@ -5,29 +5,39 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.golemplains;
 
 [RegisterPermutation("golemplains2", "Titanic Plains", "Colossus Heads", description = "Two Colossus heads will sometimes appear on the alternate Titanic Plains variant")]
-public class ColossusHead : PermutationBehaviour, StagePermutationsProvider.IStaticContent
+public class ColossusHead : PermutationBehaviour, StagePermutationsPlugin.IAsyncInit
 {
     const string GATE_NAME_RUINED = "BlockedByRuinedColossusHead";
     const string GATE_NAME_FULL = "BlockedByFullColossusHead";
 
-    public IEnumerator LoadAsync(IProgress<float> progressReceiver)
+    public IEnumerator Init()
     {
+        // golemplains2 mistakenly has two ground nodegraphs since sots
+        // The second nodegraph is used currently but we modify both in case that changes
         var golemplains2GroundNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/golemplains2/golemplains2GroundNodesNodegraph.asset");
+        var golemplains2GroundNodesNodegraph1 = Addressables.LoadAssetAsync<NodeGraph>("RoR2/golemplains2GroundNodesNodegraph.asset");
         var golemplains2AirNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/golemplains2/golemplains2AirNodesNodegraph.asset");
 
         List<NodeGraph.NodeIndex> dest = [];
 
         yield return golemplains2GroundNodesNodegraph;
-        NodeGraph groundNodegraph = golemplains2GroundNodesNodegraph.Result;
-        groundNodegraph.blockMap.GetItemsInSphere(new Vector3(236.6f, 43.9f, 45.2f), 5f, dest);
-        groundNodegraph.blockMap.GetItemsInSphere(new Vector3(245.7f, 45f, 45f), 5f, dest);
-        groundNodegraph.blockMap.GetItemsInSphere(new Vector3(251f, 45f, 35f), 5f, dest);
-        groundNodegraph.blockMap.GetItemsInSphere(new Vector3(250f, 43f, 25.6f), 5f, dest);
-        AssignNodesToGate(groundNodegraph, dest, GATE_NAME_RUINED);
-        dest.Clear();
-        groundNodegraph.blockMap.GetItemsInSphere(new Vector3(-28.8f, 47.6f, -154f), 30f, dest);
-        AssignNodesToGate(groundNodegraph, dest, GATE_NAME_FULL);
-        dest.Clear();
+        ModifyGolemplains2GroundNodesNodegraph(golemplains2GroundNodesNodegraph.Result);
+
+        yield return golemplains2GroundNodesNodegraph1;
+        ModifyGolemplains2GroundNodesNodegraph(golemplains2GroundNodesNodegraph1.Result);
+
+        void ModifyGolemplains2GroundNodesNodegraph(NodeGraph groundNodegraph)
+        {
+            groundNodegraph.blockMap.GetItemsInSphere(new Vector3(236.6f, 43.9f, 45.2f), 5f, dest);
+            groundNodegraph.blockMap.GetItemsInSphere(new Vector3(245.7f, 45f, 45f), 5f, dest);
+            groundNodegraph.blockMap.GetItemsInSphere(new Vector3(251f, 45f, 35f), 5f, dest);
+            groundNodegraph.blockMap.GetItemsInSphere(new Vector3(250f, 43f, 25.6f), 5f, dest);
+            AssignNodesToGate(groundNodegraph, dest, GATE_NAME_RUINED);
+            dest.Clear();
+            groundNodegraph.blockMap.GetItemsInSphere(new Vector3(-28.8f, 47.6f, -154f), 30f, dest);
+            AssignNodesToGate(groundNodegraph, dest, GATE_NAME_FULL);
+            dest.Clear();
+        }
 
         yield return golemplains2AirNodesNodegraph;
         NodeGraph airNodegraph = golemplains2AirNodesNodegraph.Result;
@@ -64,7 +74,8 @@ public class ColossusHead : PermutationBehaviour, StagePermutationsProvider.ISta
         {
             return;
         }
-        if (!ruinsHolder.transform.TryFind("GPRuinedRing1 (1)", out Transform ruinedRing))
+        Transform ruinedRing = ruinsHolder.transform.Cast<Transform>().Where(x => x.gameObject.name == "GPRuinedRing1").ElementAtOrDefault(1);
+        if (!ruinedRing)
         {
             return;
         }
@@ -97,7 +108,7 @@ public class ColossusHead : PermutationBehaviour, StagePermutationsProvider.ISta
         {
             return;
         }
-        Transform GPTerrainColumn = columnsHolder.transform.AllChildren().Where(x => x.name == "GPTerrainColumn").ElementAtOrDefault(2);
+        Transform GPTerrainColumn = columnsHolder.transform.AllChildren().Where(x => x.name == "GP_TerrainColumn").ElementAtOrDefault(2);
         if (!GPTerrainColumn)
         {
             return;

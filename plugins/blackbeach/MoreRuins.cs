@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 namespace StagePermutations.blackbeach;
 
 [RegisterPermutation("blackbeach", "Distant Roost", "New Ruin Gate", description = "Sometimes a new ruin gate will appear on the upper walkway of the original Distant Roost variant")]
-public class MoreRuins : PermutationBehaviour, StagePermutationsProvider.IStaticContent
+public class MoreRuins : PermutationBehaviour, StagePermutationsPlugin.IAsyncInit
 {
     const string GATE_NAME = "BlockedByRuinsPath";
 
-    public IEnumerator LoadAsync(IProgress<float> progressReceiver)
+    public IEnumerator Init()
     {
         var blackbeachGroundNodes = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/blackbeach/blackbeachGroundNodes.asset");
         var blackbeachAirNodes = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/blackbeach/blackbeachAirNodes.asset");
@@ -34,7 +34,7 @@ public class MoreRuins : PermutationBehaviour, StagePermutationsProvider.IStatic
         {
             return;
         }
-        if (!gameplaySpace.transform.TryFind("BbRuinGate_LOD0 (2)", out Transform BbRuinGate))
+        if (!gameplaySpace.transform.TryFind("Ruins/BbRuinArch_LOD0 (2)", out Transform BbRuinGate))
         {
             return;
         }
@@ -43,10 +43,10 @@ public class MoreRuins : PermutationBehaviour, StagePermutationsProvider.IStatic
         moreRuins.SetActive(false);
         moreRuins.transform.SetParent(gameplaySpace.transform, false);
         GameObject ruinGate = Object.Instantiate(BbRuinGate.gameObject, moreRuins.transform);
-        ruinGate.transform.localPosition = new Vector3(130f, -135f, -74.5f);
+        ruinGate.transform.localPosition = new Vector3(120f, -143f, -74.5f);
 
         Addressable("RoR2/Base/blackbeach/BbRuinStep1_LOD0.fbx", out Mesh BbRuinStep1Mesh);
-        if (gameplaySpace.transform.TryFind("BbRuinStep1_LOD0 (1)", out Transform BbRuinStep1))
+        if (gameplaySpace.transform.TryFind("Ruins/BbRuinStep1_LOD0 (1)", out Transform BbRuinStep1))
         {
             GameObject step1 = Object.Instantiate(BbRuinStep1.gameObject, moreRuins.transform);
             step1.GetComponent<MeshFilter>().sharedMesh = BbRuinStep1Mesh;
