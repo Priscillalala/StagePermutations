@@ -11,16 +11,26 @@ public class ShroomShelf : PermutationBehaviour, StagePermutationsPlugin.IAsyncI
 
     public IEnumerator Init()
     {
+        // rootjungle mistakenly has two ground nodegraphs since sots
+        // The second nodegraph is used currently but we modify both in case that changes
         var rootjungleGroundNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/rootjungle/rootjungleGroundNodesNodegraph.asset");
+        var rootjungleGroundNodesNodegraph1 = Addressables.LoadAssetAsync<NodeGraph>("RoR2/rootjungleGroundNodesNodegraph.asset");
         var rootjungleAirNodesNodegraph = Addressables.LoadAssetAsync<NodeGraph>("RoR2/Base/rootjungle/rootjungleAirNodesNodegraph.asset");
 
         List<NodeGraph.NodeIndex> dest = [];
 
         yield return rootjungleGroundNodesNodegraph;
-        NodeGraph groundNodegraph = rootjungleGroundNodesNodegraph.Result;
-        groundNodegraph.blockMap.GetItemsInSphere(new Vector3(63, 30, 90), 30f, dest);
-        AssignNodesToGate(groundNodegraph, dest, GATE_NAME);
-        dest.Clear();
+        ModifyRootjungleGroundNodesNodegraph(rootjungleGroundNodesNodegraph.Result);
+
+        yield return rootjungleGroundNodesNodegraph1;
+        ModifyRootjungleGroundNodesNodegraph(rootjungleGroundNodesNodegraph1.Result);
+
+        void ModifyRootjungleGroundNodesNodegraph(NodeGraph groundNodegraph)
+        {
+            groundNodegraph.blockMap.GetItemsInSphere(new Vector3(63, 30, 90), 30f, dest);
+            AssignNodesToGate(groundNodegraph, dest, GATE_NAME);
+            dest.Clear();
+        }
 
         yield return rootjungleAirNodesNodegraph;
         NodeGraph airNodegraph = rootjungleAirNodesNodegraph.Result;

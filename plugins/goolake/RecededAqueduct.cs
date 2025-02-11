@@ -53,23 +53,20 @@ public class RecededAqueduct : PermutationBehaviour, StagePermutationsPlugin.IAs
         {
             if (miscPropsHolder.transform.TryFind("Props", out Transform props))
             {
-                Transform eelSkeleton = props.Cast<Transform>().Where(x => x.gameObject.name == "GL_EelSkeleton").ElementAt(1);
-                if (eelSkeleton)
-                {
-                    Transform archEelSkeleton = Object.Instantiate(eelSkeleton.gameObject, eelSkeleton.parent).transform;
-                    archEelSkeleton.localPosition = new Vector3(19.4f, -27f, -78f);
-                    archEelSkeleton.localEulerAngles = new Vector3(53f, 78f, 339f);
-                    archEelSkeleton.localScale = Vector3.one * 14.4f;
-                    archEelSkeleton.gameObject.SetActive(false);
-                    setSceneObjectsActive.objectsToActivate.Add(archEelSkeleton.gameObject);
+                Addressable("RoR2/Base/goolake/GL_EelSkeleton.prefab", out GameObject GL_EelSkeleton);
+                Transform archEelSkeleton = Object.Instantiate(GL_EelSkeleton, props).transform;
+                archEelSkeleton.localPosition = new Vector3(19.4f, -27.32f, -78f);
+                archEelSkeleton.localEulerAngles = new Vector3(53f, 78f, 339f);
+                archEelSkeleton.localScale = Vector3.one * 14.4f;
+                archEelSkeleton.gameObject.SetActive(false);
+                setSceneObjectsActive.objectsToActivate.Add(archEelSkeleton.gameObject);
 
-                    Transform eelSkeletonTail = Object.Instantiate(eelSkeleton.gameObject, eelSkeleton.parent).transform;
-                    eelSkeletonTail.localPosition = new Vector3(-79f, -87f, -128f);
-                    eelSkeletonTail.localEulerAngles = new Vector3(25f, 226f, 173f);
-                    eelSkeletonTail.localScale = Vector3.one * 9f;
-                    eelSkeletonTail.gameObject.SetActive(false);
-                    setSceneObjectsActive.objectsToActivate.Add(eelSkeletonTail.gameObject);
-                }
+                Transform eelSkeletonTail = Object.Instantiate(GL_EelSkeleton, props).transform;
+                eelSkeletonTail.localPosition = new Vector3(-79f, -87f, -128f);
+                eelSkeletonTail.localEulerAngles = new Vector3(25f, 226f, 173f);
+                eelSkeletonTail.localScale = Vector3.one * 9f;
+                eelSkeletonTail.gameObject.SetActive(false);
+                setSceneObjectsActive.objectsToActivate.Add(eelSkeletonTail.gameObject);
             }
         }
         Addressable("RoR2/Base/goolake/spmGlBamboo1Large.spm", out GameObject spmGlBamboo1Large);
